@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://daamophqprcvi"]
+
+[sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_e5uuo"]
+
+[node name="World" type="Node3D" unique_id=1825888102]
+
+[node name="VoxelTerrain" type="VoxelTerrain" parent="." unique_id=1421049333]
+mesher = SubResource("VoxelMesherTransvoxel_e5uuo")
