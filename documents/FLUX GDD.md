@@ -16,7 +16,7 @@ The gameplay loop of **FLUX** is a systemic, physics-driven progression from man
 
 ### **2\. Planning & Kinetic Automation (Mid Game)**
 
-* **Holo-Canvas/Integrated into a tool that tries to be like Minecraft building mods like World Edit or Axiom:** Players pre-design machines using a holographic planning system. (if they want, this will be done with a special button or tool idk, same for moving objects, it’s gonna be a “Axiom” mod in minecraft just for this game)ONLY IN CREATIVE NOT IN SURVIVAL SO FAR  
+* **Holo-Canvas/Integrated into a tool that tries to be like Minecraft building mods like World Edit or Axiom:** Players pre-design machines using a holographic planning system. (if they want, this will be done with a special button or tool idk, same for moving objects, it’s gonna be a “Axiom” mod in minecraft just for this game)ONLY IN CREATIVE NOT IN SURVIVAL  
 * **Materialization:** Designs are built physically using gathered resources.   
 * **Mechanical systems:** Energy is transmitted through shafts and gears instead of cables, forming early mechanical automation networks.
 
@@ -73,15 +73,27 @@ This system is designed to balance exploration, logistics, and economy, pushing 
 | **Drift** | Variable | −20 | Chaotic | Thin | Temporal shear | Gravity shifts unpredictably | Momentum-harvesting engines; |
 | **Bloom** | 0.9 | 35 | Pollinated | Bioluminescent | Organic overgrowth | Fast-growing flora breaches structures; spore corrosion | Bio-reactors; living architecture; self-repairing materials ig, depends very heavy on chemistry engine |
 
-## 
-
-## This seems like i’d make the next “The Forest” however I plan on making the actual survival systems really simple, i don’t even think imma implement thirst idk. Survival is not the main focus of the games.
-
 ## **Raytraced Audio Engine**
 
-Raytraced Audio is cool n’ shit :3. And i think it really fits the vibe of all of this stuff (plus it isnt a work for me someone ported [this](https://www.youtube.com/watch?v=u6EuAUjq92k) to a GD addon, I mean its a big buggy but it’s gonna be sick fr.
+Raytraced Audio is cool n’ shit :3. And i think it really fits the vibe of all of this stuff [I Built Raytraced Audio for Godot](https://www.youtube.com/watch?v=A6bPUXTlic8)
 
-##  **Other Self-written Plug-ins**
+## **Blocks**
+
+Meadow (starter Biome)
+
+Dirt:1,400 kg/m³  
+Grass: 150–300 kg/m³  
+Oak: 150–300 kg/m³   
+Sandstone: 2.100 kg/m³  
+Loam: 1.400 kg/m³
+
+## 
+
+## 
+
+## 
+
+##  **Broad Feature list**
 
 ### **Core Physics & Voxel System**
 
@@ -149,11 +161,3 @@ Raytraced Audio is cool n’ shit :3. And i think it really fits the vibe of all
 - [ ] **Thermal Audio Layer** — Crackling wood, hissing steam, expanding metal pings
 
 Wait thats actually a lot :(
-
-## **Artstyle**
-
-I gotta whip my friend, he still hasnt made progress
-
-## **Current Progress**
-
-Lol, imma trynna to learn godot rn. Ill make little projects that complement one aspect of the game each so i can finally stitch them together as a full game. Highkey my ass is alr overwhelmed lol.
