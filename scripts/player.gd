@@ -29,7 +29,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("shift"):
 		current_speed = SPEED * 1.3 # Setzt den Sprint-Speed sauber fest
 
-	# 2. JETZT die Bewegung berechnen (current_speed ist jetzt NIEMALS mehr Nil)
+	# 2. JETZT die Bewegung berechnen
 	if direction:
 		velocity.x = direction.x * current_speed
 		velocity.z = direction.z * current_speed

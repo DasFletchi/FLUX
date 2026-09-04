@@ -5,7 +5,9 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_k7hc8"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_k7hc8"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
+radius = 0.4
+height = 1.8
 
 [node name="Player" type="CharacterBody3D" unique_id=703562591]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -14,18 +16,16 @@ script = ExtResource("1_3vyb7")
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=1074939087]
 transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
 material_override = ExtResource("2_g2els")
-use_collision = true
 mesh = SubResource("BoxMesh_k7hc8")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1435934440]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.84750223, -0.3275295)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.84750223, -0.401824)
 
 [node name="VoxelViewer" type="VoxelViewer" parent="." unique_id=677273485]
 view_distance = 512
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1467183820]
-transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_k7hc8")
+shape = SubResource("CapsuleShape3D_player")
 
 [node name="Decor" type="Node3D" parent="." unique_id=596114069]
 visible = false
