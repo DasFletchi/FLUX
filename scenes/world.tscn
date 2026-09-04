@@ -44,6 +44,7 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="VoxelTerrain" type="VoxelTerrain" parent="." unique_id=1421049333]
+max_view_distance = 512
 generator = SubResource("VoxelGeneratorNoise_4kvqd")
 mesher = SubResource("VoxelMesherBlocky_nnsk1")
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)

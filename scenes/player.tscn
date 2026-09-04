@@ -22,7 +22,7 @@ mesh = SubResource("BoxMesh_k7hc8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.84750223, -0.401824)
 
 [node name="VoxelViewer" type="VoxelViewer" parent="." unique_id=677273485]
-view_distance = 512
+view_distance = 2048
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1467183820]
 shape = SubResource("CapsuleShape3D_player")
