@@ -13,6 +13,7 @@ script = ExtResource("1_3vyb7")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=1074939087]
 transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("2_g2els")
 use_collision = true
 mesh = SubResource("BoxMesh_k7hc8")
 
