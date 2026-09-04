@@ -11,6 +11,14 @@ extends CharacterBody3D
 var current_speed
 var jump_cooldown: float = 0.0
 
+func _ready() -> void:
+	var terrain = get_parent().get_node_or_null("VoxelTerrain") #zieht sich die voxel terrain node und ist fine wenn er null kriegt
+	if terrain: #wenn er einen terrain findet/wenn terrain fine ist
+		set_physics_process(false)
+		while not terrain.is_area_meshed(AABB(terrain.to_local(global_position) - Vector3(1, 2, 1), Vector3(2, 2, 2))): #hier braucht man warum auch immer diesen crazy shit we mit to local weil wir unsere welt ja in der transform auf 0.25 haben. und mit dem vecor minus ding type shit da das ist für die AABB, wo die spawnen soll und checken soll
+			await get_tree().process_frame #ALLES WAS IN READY UNTER DIESER SCHLEIFE STEHT SKIPPEN
+		set_physics_process(true)
+
 func _physics_process(delta: float) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
