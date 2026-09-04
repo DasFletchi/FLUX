@@ -17,7 +17,7 @@ use_collision = true
 mesh = SubResource("BoxMesh_k7hc8")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1435934440]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.84750223, -0.46455145)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.84750223, -0.3275295)
 
 [node name="VoxelViewer" type="VoxelViewer" parent="." unique_id=677273485]
 
