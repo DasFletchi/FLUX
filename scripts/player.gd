@@ -36,3 +36,4 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		camera_3d.rotate_x(-event.relative.y * mouse_sensitivity)
+		camera_3d.rotation.x = clamp(camera_3d.rotation.x, -PI/2, PI/2) #clamped halt die rotation um x rum die hälfte von PI (180) auf beiden seiten

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bjx5b7kd2kx74"]
 
 [ext_resource type="Script" uid="uid://dhtpjsglgh37g" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="Material" uid="uid://c75keiw8c43bm" path="res://scenes/blocks/materials/black.tres" id="2_g2els"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_k7hc8"]
 
@@ -16,10 +17,21 @@ use_collision = true
 mesh = SubResource("BoxMesh_k7hc8")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1435934440]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.84750223, -0.401824)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.84750223, -0.46455145)
 
 [node name="VoxelViewer" type="VoxelViewer" parent="." unique_id=677273485]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1467183820]
 transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_k7hc8")
+
+[node name="Decor" type="Node3D" parent="." unique_id=596114069]
+visible = false
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Decor" unique_id=1386080958]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.27655888, 0.6934494, -0.49623942)
+material = ExtResource("2_g2els")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="Decor" unique_id=240261173]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.22863841, 0.6934494, -0.49623942)
+material = ExtResource("2_g2els")
