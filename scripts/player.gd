@@ -19,11 +19,17 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
+	
+	if Input.is_action_just_pressed("space") and is_on_floor(): #you can still jump faster than that by murdering ur spacebar
+		velocity.y = JUMP_VELOCITY
+	
 	if jump_cooldown > 0.0: #Läuft die Stoppuhr gerade noch?
 		jump_cooldown -= delta #Ziehe die vergangene Zeit (0,016s) von der Restzeit ab.
 	if Input.is_action_pressed("space") and is_on_floor() and jump_cooldown <= 0.0:
 		velocity.y = JUMP_VELOCITY
 		jump_cooldown = auto_jump_cooldown
+	
+	
 	
 	# Get the input direction.
 	var input_dir := Input.get_vector("a", "d", "w", "s")
