@@ -3,11 +3,13 @@ extends CharacterBody3D
 @onready var camera_3d: Camera3D = $Camera3D
 
 @export var SPEED = 4.317
-var current_speed
-const JUMP_VELOCITY = 6.42
-
-
+@export var auto_jump_cooldown = 0.3
+@export var JUMP_VELOCITY = 6.42
 @export var mouse_sensitivity: float = 0.002
+
+
+var current_speed
+var jump_cooldown: float = 0.0
 
 func _physics_process(delta: float) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -17,9 +19,12 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("space") and is_on_floor():
+	if jump_cooldown > 0.0: #Läuft die Stoppuhr gerade noch?
+		jump_cooldown -= delta #Ziehe die vergangene Zeit (0,016s) von der Restzeit ab.
+	if Input.is_action_pressed("space") and is_on_floor() and jump_cooldown <= 0.0:
 		velocity.y = JUMP_VELOCITY
-
+		jump_cooldown = auto_jump_cooldown
+	
 	# Get the input direction.
 	var input_dir := Input.get_vector("a", "d", "w", "s")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
