@@ -11,6 +11,7 @@ extends CharacterBody3D
 var current_speed
 var jump_cooldown: float = 0.0
 
+
 func _ready() -> void:
 	var terrain = get_parent().get_node_or_null("VoxelTerrain") #zieht sich die voxel terrain node und ist fine wenn er null kriegt
 	if terrain: #wenn er einen terrain findet/wenn terrain fine ist
@@ -27,7 +28,6 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	
 	if Input.is_action_just_pressed("space") and is_on_floor(): #you can still jump faster than that by murdering ur spacebar
 		velocity.y = JUMP_VELOCITY
 	
