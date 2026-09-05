@@ -27,16 +27,16 @@ glow_enabled = true
 
 [sub_resource type="VoxelGeneratorGraph" id="VoxelGeneratorGraph_7r4gi"]
 graph_data = {
-"connections": [[10, 0, 7, 2], [9, 0, 10, 0], [2, 0, 9, 0], [8, 0, 10, 1], [7, 0, 6, 0]],
+"connections": [[10, 0, 7, 2], [9, 0, 10, 1], [2, 0, 9, 0], [8, 0, 10, 0], [7, 0, 6, 0]],
 "nodes": {
 "10": {
 "auto_connect": false,
-"gui_position": Vector2(1040, 80),
+"gui_position": Vector2(1000, 80),
 "type": "Subtract"
 },
 "2": {
 "auto_connect": false,
-"gui_position": Vector2(320, 80),
+"gui_position": Vector2(140, 200),
 "type": "InputY"
 },
 "6": {
@@ -45,16 +45,16 @@ graph_data = {
 "type": "OutputType"
 },
 "7": {
-"a": 1.0,
+"a": 0.0,
 "auto_connect": false,
-"b": 0.0,
+"b": 1.0,
 "gui_position": Vector2(1240, 40),
 "threshold": 0.0,
 "type": "Select"
 },
 "8": {
 "auto_connect": true,
-"gui_position": Vector2(620, 220),
+"gui_position": Vector2(460, 20),
 "noise": SubResource("ZN_FastNoiseLite_i7141"),
 "type": "FastNoise3D",
 "x": 0.0,
@@ -63,8 +63,8 @@ graph_data = {
 },
 "9": {
 "auto_connect": false,
-"b": 0.05,
-"gui_position": Vector2(600, 60),
+"b": 0.01,
+"gui_position": Vector2(420, 180),
 "type": "Multiply"
 }
 },
