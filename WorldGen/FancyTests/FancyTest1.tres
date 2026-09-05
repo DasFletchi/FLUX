@@ -40,7 +40,7 @@ graph_data = {
 },
 "9": {
 "auto_connect": false,
-"b": 0.02,
+"b": 0.01,
 "gui_position": Vector2(420, 180),
 "type": "Multiply"
 }
