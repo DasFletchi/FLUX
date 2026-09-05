@@ -23,13 +23,51 @@ ssao_enabled = true
 sdfgi_enabled = true
 glow_enabled = true
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_qgk2k"]
-noise_type = 0
-frequency = 0.0025
-
-[sub_resource type="VoxelGeneratorNoise" id="VoxelGeneratorNoise_4kvqd"]
-channel = 0
-noise = SubResource("FastNoiseLite_qgk2k")
+[sub_resource type="VoxelGeneratorGraph" id="VoxelGeneratorGraph_i7141"]
+graph_data = {
+"connections": [[8, 0, 6, 0], [2, 0, 8, 2]],
+"nodes": {
+"1": {
+"auto_connect": false,
+"gui_position": Vector2(440, 50),
+"type": "InputX"
+},
+"11": {
+"auto_connect": false,
+"gui_position": Vector2(860, 200),
+"gui_size": Vector2(494.29993, 133.20007),
+"text": "Checkt ob etwas über null ist wenn ja, dann luft wenn nicht dann Gras
+das sagt der Blödman aber nicht so einfach sondern er gibt nur Type values
+ raus wo dann zylann checken
+kann welche value nun zu welchem block gehört und kann das dann zeichnen.",
+"type": "Comment"
+},
+"2": {
+"auto_connect": false,
+"gui_position": Vector2(460, 140),
+"type": "InputY"
+},
+"3": {
+"auto_connect": false,
+"gui_position": Vector2(440, 250),
+"type": "InputZ"
+},
+"6": {
+"auto_connect": false,
+"gui_position": Vector2(1240, 40),
+"type": "OutputType"
+},
+"8": {
+"a": 1.0,
+"auto_connect": false,
+"b": 0.0,
+"gui_position": Vector2(920, 0),
+"threshold": 0.0,
+"type": "Select"
+}
+},
+"version": 2
+}
 
 [sub_resource type="VoxelBlockyModelCube" id="VoxelBlockyModelCube_grass"]
 material_override_0 = ExtResource("1_grass")
@@ -66,7 +104,7 @@ shadow_enabled = true
 
 [node name="VoxelTerrain" type="VoxelTerrain" parent="." unique_id=1421049333]
 max_view_distance = 512
-generator = SubResource("VoxelGeneratorNoise_4kvqd")
+generator = SubResource("VoxelGeneratorGraph_i7141")
 mesher = SubResource("VoxelMesherBlocky_nnsk1")
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 
