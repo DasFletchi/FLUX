@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://daamophqprcvi"]
 
+[ext_resource type="VoxelGeneratorGraph" uid="uid://bea4qapk7w24y" path="res://WorldGen/FancyTest1/FancyTest1.tres" id="1_4mrxx"]
 [ext_resource type="Material" path="res://scenes/blocks/materials/grass.tres" id="1_grass"]
 [ext_resource type="Material" path="res://scenes/blocks/materials/dirt.tres" id="2_dirt"]
 [ext_resource type="PackedScene" uid="uid://bjx5b7kd2kx74" path="res://scenes/player.tscn" id="2_rwgxs"]
@@ -22,54 +23,6 @@ tonemap_mode = 2
 ssao_enabled = true
 sdfgi_enabled = true
 glow_enabled = true
-
-[sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_i7141"]
-
-[sub_resource type="VoxelGeneratorGraph" id="VoxelGeneratorGraph_7r4gi"]
-graph_data = {
-"connections": [[10, 0, 7, 2], [9, 0, 10, 1], [2, 0, 9, 0], [8, 0, 10, 0], [7, 0, 6, 0]],
-"nodes": {
-"10": {
-"auto_connect": false,
-"gui_position": Vector2(1000, 80),
-"type": "Subtract"
-},
-"2": {
-"auto_connect": false,
-"gui_position": Vector2(140, 200),
-"type": "InputY"
-},
-"6": {
-"auto_connect": false,
-"gui_position": Vector2(1560, 80),
-"type": "OutputType"
-},
-"7": {
-"a": 0.0,
-"auto_connect": false,
-"b": 1.0,
-"gui_position": Vector2(1240, 40),
-"threshold": 0.0,
-"type": "Select"
-},
-"8": {
-"auto_connect": true,
-"gui_position": Vector2(460, 20),
-"noise": SubResource("ZN_FastNoiseLite_i7141"),
-"type": "FastNoise3D",
-"x": 0.0,
-"y": 0.0,
-"z": 0.0
-},
-"9": {
-"auto_connect": false,
-"b": 0.01,
-"gui_position": Vector2(420, 180),
-"type": "Multiply"
-}
-},
-"version": 2
-}
 
 [sub_resource type="VoxelBlockyModelCube" id="VoxelBlockyModelCube_grass"]
 material_override_0 = ExtResource("1_grass")
@@ -105,7 +58,7 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="VoxelTerrain" type="VoxelTerrain" parent="." unique_id=1421049333]
-generator = SubResource("VoxelGeneratorGraph_7r4gi")
+generator = ExtResource("1_4mrxx")
 mesher = SubResource("VoxelMesherBlocky_nnsk1")
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 
