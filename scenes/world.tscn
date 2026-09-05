@@ -27,44 +27,45 @@ glow_enabled = true
 
 [sub_resource type="VoxelGeneratorGraph" id="VoxelGeneratorGraph_7r4gi"]
 graph_data = {
-"connections": [[8, 0, 7, 2], [7, 0, 6, 0]],
+"connections": [[10, 0, 7, 2], [9, 0, 10, 0], [2, 0, 9, 0], [8, 0, 10, 1], [7, 0, 6, 0]],
 "nodes": {
-"1": {
+"10": {
 "auto_connect": false,
-"gui_position": Vector2(440, 50),
-"type": "InputX"
+"gui_position": Vector2(1040, 80),
+"type": "Subtract"
 },
 "2": {
 "auto_connect": false,
-"gui_position": Vector2(440, 150),
+"gui_position": Vector2(320, 80),
 "type": "InputY"
-},
-"3": {
-"auto_connect": false,
-"gui_position": Vector2(440, 250),
-"type": "InputZ"
 },
 "6": {
 "auto_connect": false,
-"gui_position": Vector2(1240, 120),
+"gui_position": Vector2(1560, 80),
 "type": "OutputType"
 },
 "7": {
 "a": 1.0,
 "auto_connect": false,
 "b": 0.0,
-"gui_position": Vector2(960, 60),
+"gui_position": Vector2(1240, 40),
 "threshold": 0.0,
 "type": "Select"
 },
 "8": {
 "auto_connect": true,
-"gui_position": Vector2(660, 80),
+"gui_position": Vector2(620, 220),
 "noise": SubResource("ZN_FastNoiseLite_i7141"),
 "type": "FastNoise3D",
 "x": 0.0,
 "y": 0.0,
 "z": 0.0
+},
+"9": {
+"auto_connect": false,
+"b": 0.05,
+"gui_position": Vector2(600, 60),
+"type": "Multiply"
 }
 },
 "version": 2
@@ -104,7 +105,6 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="VoxelTerrain" type="VoxelTerrain" parent="." unique_id=1421049333]
-max_view_distance = 512
 generator = SubResource("VoxelGeneratorGraph_7r4gi")
 mesher = SubResource("VoxelMesherBlocky_nnsk1")
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
