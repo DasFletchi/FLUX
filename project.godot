@@ -39,6 +39,7 @@ enabled=PackedStringArray("res://addons/netfox.internals/plugin.cfg", "res://add
 [file_customization]
 
 folder_colors={
+"res://WorldGen/": "purple",
 "res://addons/": "gray",
 "res://documents/": "pink",
 "res://scenes/": "teal",
