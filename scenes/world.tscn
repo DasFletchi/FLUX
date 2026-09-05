@@ -24,6 +24,7 @@ sdfgi_enabled = true
 glow_enabled = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qgk2k"]
+noise_type = 0
 frequency = 0.0025
 
 [sub_resource type="VoxelGeneratorNoise" id="VoxelGeneratorNoise_4kvqd"]
