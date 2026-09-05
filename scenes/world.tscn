@@ -21,8 +21,11 @@ background_mode = 2
 sky = SubResource("Sky_rwgxs")
 tonemap_mode = 2
 ssao_enabled = true
-sdfgi_enabled = true
 glow_enabled = true
+volumetric_fog_density = 0.002
+volumetric_fog_length = 371.7
+volumetric_fog_detail_spread = 5.0982413
+volumetric_fog_sky_affect = 0.635
 
 [sub_resource type="VoxelBlockyModelCube" id="VoxelBlockyModelCube_grass"]
 material_override_0 = ExtResource("1_grass")
