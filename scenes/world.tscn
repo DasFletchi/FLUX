@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://daamophqprcvi"]
 
-[ext_resource type="VoxelGeneratorGraph" uid="uid://cx3ceoxafn85i" path="res://WorldGen/FancyTests/FancyTest3.tres" id="1_4mrxx"]
+[ext_resource type="VoxelGeneratorGraph" uid="uid://cx3ceoxafn85i" path="res://WorldGen/FancyTests/FancyTest4.tres" id="1_4mrxx"]
 [ext_resource type="Material" path="res://scenes/blocks/materials/grass.tres" id="1_grass"]
 [ext_resource type="Material" path="res://scenes/blocks/materials/dirt.tres" id="2_dirt"]
 [ext_resource type="PackedScene" uid="uid://bjx5b7kd2kx74" path="res://scenes/player.tscn" id="2_rwgxs"]
