@@ -1,0 +1,95 @@
+[gd_resource type="VoxelGeneratorGraph" format=3 uid="uid://cx3ceoxafn85i"]
+
+[sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_i7141"]
+
+[resource]
+graph_data = {
+"connections": [[9, 0, 10, 1], [8, 0, 10, 0], [7, 0, 6, 0], [2, 0, 9, 0], [2, 0, 12, 2], [2, 0, 13, 2], [13, 0, 7, 1], [12, 0, 13, 0], [10, 0, 7, 2]],
+"nodes": {
+"10": {
+"auto_connect": false,
+"gui_position": Vector2(1080, -20),
+"name": &"Density (Solid vs Air)",
+"type": "Subtract"
+},
+"12": {
+"a": 3.0,
+"auto_connect": false,
+"b": 2.0,
+"gui_position": Vector2(940, 260),
+"name": &"Stone (< -5) vs Dirt",
+"threshold": -5.0,
+"type": "Select"
+},
+"13": {
+"auto_connect": false,
+"b": 1.0,
+"gui_position": Vector2(1260, 400),
+"name": &"Ground (< 8) vs Grass",
+"threshold": 8.0,
+"type": "Select"
+},
+"2": {
+"auto_connect": false,
+"gui_position": Vector2(-260, 220),
+"type": "InputY"
+},
+"20": {
+"auto_connect": false,
+"gui_position": Vector2(-160, -420),
+"gui_size": Vector2(620, 190),
+"name": &"Cheatsheet",
+"text": "DEUTSCH:
+- FastNoise3D: 3D-Hoehlen-Rauschen (-1 bis +1)
+- Subtract: Dichte = Noise - (Y * 0.02)
+- Stone vs Dirt: Unter -5 = Stein (3), darueber = Dirt (2)
+- Ground vs Grass: Unter 8 = Boden, darueber = Gras (1)
+- Air Check: Dichte < 0 = Luft (0)
+
+ENGLISH:
+- FastNoise3D: 3D cave noise (-1 to +1)
+- Subtract: Density = Noise - (Y * 0.02)
+- Stone vs Dirt: Below -5 is Stone (3), above is Dirt (2)
+- Ground vs Grass: Below 8 is Ground, above is Grass (1)
+- Air Check: Density < 0 is Air (0)",
+"type": "Comment"
+},
+"21": {
+"auto_connect": false,
+"gui_position": Vector2(60, 60),
+"gui_size": Vector2(145.85327, 81.115845),
+"text": "Multiply that so it fits
+with the FastNoise3D",
+"type": "Comment"
+},
+"6": {
+"auto_connect": false,
+"gui_position": Vector2(1940, 100),
+"type": "OutputType"
+},
+"7": {
+"a": 0.0,
+"auto_connect": false,
+"gui_position": Vector2(1580, 100),
+"name": &"Air Check",
+"threshold": 0.0,
+"type": "Select"
+},
+"8": {
+"auto_connect": true,
+"gui_position": Vector2(560, -80),
+"noise": SubResource("ZN_FastNoiseLite_i7141"),
+"type": "FastNoise3D",
+"x": 0.0,
+"y": 0.0,
+"z": 0.0
+},
+"9": {
+"auto_connect": false,
+"b": 0.02,
+"gui_position": Vector2(60, 140),
+"type": "Multiply"
+}
+},
+"version": 2
+}
