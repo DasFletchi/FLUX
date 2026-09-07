@@ -4,7 +4,7 @@
 
 [resource]
 graph_data = {
-"connections": [[34, 0, 6, 0], [8, 0, 33, 1], [32, 0, 33, 0], [31, 0, 32, 0], [30, 0, 31, 0], [33, 0, 34, 0], [2, 0, 30, 0]],
+"connections": [[36, 0, 6, 0], [35, 0, 36, 0], [8, 0, 33, 1], [34, 0, 35, 0], [32, 0, 33, 0], [31, 0, 32, 0], [30, 0, 31, 0], [33, 0, 34, 0], [2, 0, 30, 0]],
 "nodes": {
 "2": {
 "auto_connect": false,
@@ -63,15 +63,21 @@ Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
 "type": "Stepify"
 },
 "35": {
-"a": 0.0,
 "auto_connect": false,
-"b": 1.0,
-"gui_position": Vector2(1840, -40),
+"b": 2.0,
+"gui_position": Vector2(1520, 100),
 "type": "Add"
+},
+"36": {
+"auto_connect": false,
+"gui_position": Vector2(1780, 280),
+"max": 3.0,
+"min": 0.0,
+"type": "Clamp"
 },
 "6": {
 "auto_connect": false,
-"gui_position": Vector2(1580, 240),
+"gui_position": Vector2(2020, 120),
 "type": "OutputType"
 },
 "8": {
