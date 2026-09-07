@@ -1,4 +1,4 @@
-[gd_resource type="VoxelGeneratorGraph" format=3 uid="uid://d4gxahvufoxof"]
+[gd_resource type="VoxelGeneratorGraph" format=3]
 
 [sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_i7141"]
 period = 118.6001
@@ -32,16 +32,16 @@ Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
 "30": {
 "auto_connect": false,
 "gui_position": Vector2(0, 100),
-"max": 300.0,
-"min": -300.0,
+"max": 150.0,
+"min": -150.0,
 "name": &"Clamp Y (-300 to 300)",
 "type": "ClampC"
 },
 "31": {
 "auto_connect": false,
-"b": 15.0,
+"b": 100.0,
 "gui_position": Vector2(300, 120),
-"name": &"y / 15",
+"name": &"y / 100",
 "type": "Divide"
 },
 "32": {
@@ -54,7 +54,7 @@ Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
 "33": {
 "auto_connect": false,
 "gui_position": Vector2(880, 40),
-"name": &"Dichte: ((y/15)*-1) + Noise",
+"name": &"Dichte: ((y/100)*-1) + Noise",
 "type": "Add"
 },
 "34": {
@@ -65,7 +65,7 @@ Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
 },
 "35": {
 "auto_connect": false,
-"b": 0.8,
+"b": 0.0,
 "gui_position": Vector2(1520, 100),
 "type": "Add"
 },
