@@ -1,0 +1,88 @@
+[gd_resource type="VoxelGeneratorGraph" format=3 uid="uid://d4gxahvufoxof"]
+
+[sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_i7141"]
+
+[resource]
+graph_data = {
+"connections": [[34, 0, 6, 0], [8, 0, 33, 1], [32, 0, 33, 0], [31, 0, 32, 0], [30, 0, 31, 0], [33, 0, 34, 0], [2, 0, 30, 0]],
+"nodes": {
+"2": {
+"auto_connect": false,
+"gui_position": Vector2(-160, 100),
+"type": "InputY"
+},
+"20": {
+"auto_connect": false,
+"gui_position": Vector2(-200, -320),
+"gui_size": Vector2(500, 200),
+"name": &"Cheatsheet",
+"text": "DEINE FORMEL (Avatar-Worldgen):
+1. InputY -> ClampC (-300 bis 300)
+2. Divide durch 100 (y / 100)
+3. Multiply mit -1 (* -1)
+4. Add mit FastNoise3D (+ Noise)
+= Dichte! (< 0 ist Luft, >= 0 ist Land)
+
+Air Check:
+Wenn Dichte < 0 -> Luft (0)
+Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
+"type": "Comment"
+},
+"30": {
+"auto_connect": false,
+"gui_position": Vector2(0, 100),
+"max": 150.0,
+"min": -150.0,
+"name": &"Clamp Y (-300 to 300)",
+"type": "ClampC"
+},
+"31": {
+"auto_connect": false,
+"b": 100.0,
+"gui_position": Vector2(300, 120),
+"name": &"y / 100",
+"type": "Divide"
+},
+"32": {
+"auto_connect": false,
+"b": -1.0,
+"gui_position": Vector2(520, 100),
+"name": &"* -1",
+"type": "Multiply"
+},
+"33": {
+"auto_connect": false,
+"gui_position": Vector2(880, 40),
+"name": &"Dichte: ((y/100)*-1) + Noise",
+"type": "Add"
+},
+"34": {
+"auto_connect": false,
+"gui_position": Vector2(1260, 80),
+"step": 1.0,
+"type": "Stepify"
+},
+"35": {
+"a": 0.0,
+"auto_connect": false,
+"b": 1.0,
+"gui_position": Vector2(1840, -40),
+"type": "Add"
+},
+"6": {
+"auto_connect": false,
+"gui_position": Vector2(1580, 240),
+"type": "OutputType"
+},
+"8": {
+"auto_connect": true,
+"gui_position": Vector2(580, 260),
+"noise": SubResource("ZN_FastNoiseLite_i7141"),
+"type": "FastNoise3D",
+"x": 0.0,
+"y": 0.0,
+"z": 0.0
+}
+},
+"version": 2
+}
