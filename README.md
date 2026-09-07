@@ -6,7 +6,7 @@ You can find the current [GDD](https://docs.google.com/document/d/11Ip6rSM0H4UV5
 ### Tech
 
 *Currently using:*
-* Godot
+* Godot 4.7 (if this is not updated, I use Godot over Steam so it SHOULD be always the newest one)
 * Zylann.Voxel
 * Netfox
 * Netfox.Noray
