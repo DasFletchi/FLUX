@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://daamophqprcvi"]
 
-[ext_resource type="VoxelGeneratorGraph" uid="uid://cx3ceoxafn85i" path="res://WorldGen/FancyTests/FancyTest5.tres" id="1_4mrxx"]
+[ext_resource type="VoxelGeneratorGraph" uid="uid://d4gxahvufoxof" path="res://WorldGen/FancyTests/FancyTest6.tres" id="1_4mrxx"]
 [ext_resource type="Material" path="res://scenes/blocks/materials/grass.tres" id="1_grass"]
 [ext_resource type="Material" path="res://scenes/blocks/materials/dirt.tres" id="2_dirt"]
 [ext_resource type="PackedScene" uid="uid://bjx5b7kd2kx74" path="res://scenes/player.tscn" id="2_rwgxs"]
@@ -61,6 +61,7 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="VoxelTerrain" type="VoxelTerrain" parent="." unique_id=1421049333]
+max_view_distance = 512
 generator = ExtResource("1_4mrxx")
 mesher = SubResource("VoxelMesherBlocky_nnsk1")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

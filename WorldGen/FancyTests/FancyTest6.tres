@@ -1,0 +1,100 @@
+[gd_resource type="VoxelGeneratorGraph" format=3 uid="uid://d4gxahvufoxof"]
+
+[sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_i7141"]
+
+[resource]
+graph_data = {
+"connections": [[8, 0, 33, 1], [32, 0, 33, 0], [31, 0, 32, 0], [30, 0, 31, 0], [7, 0, 6, 0], [33, 0, 7, 2], [2, 0, 30, 0], [2, 0, 12, 2], [2, 0, 13, 2], [13, 0, 7, 1], [12, 0, 13, 0]],
+"nodes": {
+"12": {
+"a": 3.0,
+"auto_connect": false,
+"b": 2.0,
+"gui_position": Vector2(600, 280),
+"name": &"Stone (< -5) vs Dirt",
+"threshold": -5.0,
+"type": "Select"
+},
+"13": {
+"auto_connect": false,
+"b": 1.0,
+"gui_position": Vector2(880, 480),
+"name": &"Ground (< 8) vs Grass",
+"threshold": 8.0,
+"type": "Select"
+},
+"2": {
+"auto_connect": false,
+"gui_position": Vector2(-360, 100),
+"type": "InputY"
+},
+"20": {
+"auto_connect": false,
+"gui_position": Vector2(-200, -320),
+"gui_size": Vector2(500, 200),
+"name": &"Cheatsheet",
+"text": "DEINE FORMEL (Avatar-Worldgen):
+1. InputY -> ClampC (-300 bis 300)
+2. Divide durch 100 (y / 100)
+3. Multiply mit -1 (* -1)
+4. Add mit FastNoise3D (+ Noise)
+= Dichte! (< 0 ist Luft, >= 0 ist Land)
+
+Air Check:
+Wenn Dichte < 0 -> Luft (0)
+Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
+"type": "Comment"
+},
+"30": {
+"auto_connect": false,
+"gui_position": Vector2(0, 100),
+"max": 300.0,
+"min": -300.0,
+"name": &"Clamp Y (-300 to 300)",
+"type": "ClampC"
+},
+"31": {
+"auto_connect": false,
+"b": 100.0,
+"gui_position": Vector2(300, 100),
+"name": &"y / 100",
+"type": "Divide"
+},
+"32": {
+"auto_connect": false,
+"b": -1.0,
+"gui_position": Vector2(520, 100),
+"name": &"* -1",
+"type": "Multiply"
+},
+"33": {
+"auto_connect": false,
+"gui_position": Vector2(800, 0),
+"name": &"Dichte: ((y/100)*-1) + Noise",
+"type": "Add"
+},
+"6": {
+"auto_connect": false,
+"gui_position": Vector2(1450, 80),
+"type": "OutputType"
+},
+"7": {
+"a": 0.0,
+"auto_connect": false,
+"gui_position": Vector2(1160, 60),
+"name": &"Air Check",
+"threshold": 0.0,
+"type": "Select"
+},
+"8": {
+"auto_connect": true,
+"gui_position": Vector2(520, -100),
+"noise": SubResource("ZN_FastNoiseLite_i7141"),
+"type": "FastNoise3D",
+"x": 0.0,
+"y": 0.0,
+"z": 0.0
+}
+},
+"version": 2
+}
