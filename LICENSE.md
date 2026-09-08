@@ -27,6 +27,7 @@ You are not allowed to:
 - Use the game's assets, code, or content in unrelated projects or projects intended for public distribution without explicit permission from the creator.
 - Claim ownership or authorship of FLUX or its original content.
 - Attempt to bypass these restrictions through rebranding, repackaging, redistribution, or any other method intended to avoid the terms of this license.
+- It is prophibited to change this license or replace it.
 
 ## 4. Contributions
 
