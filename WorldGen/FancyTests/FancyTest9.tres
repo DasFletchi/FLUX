@@ -1,14 +1,13 @@
-[gd_resource type="VoxelGeneratorGraph" format=3 uid="uid://d4gxahvufoxof"]
+[gd_resource type="VoxelGeneratorGraph" format=3 uid="uid://bee2kgbars6i0"]
+
+[sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_72ylf"]
 
 [sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_i7141"]
 period = 118.6001
 
-[sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_fmx4h"]
-period = 216.5001
-
 [resource]
 graph_data = {
-"connections": [[33, 0, 34, 0], [30, 0, 31, 0], [2, 0, 30, 0], [31, 0, 32, 0], [32, 0, 33, 0], [34, 0, 35, 0], [35, 0, 36, 0], [36, 0, 6, 0], [8, 0, 33, 1]],
+"connections": [[36, 0, 6, 0], [35, 0, 36, 0], [8, 0, 33, 1], [34, 0, 35, 0], [32, 0, 33, 0], [31, 0, 32, 0], [30, 0, 31, 0], [33, 0, 34, 0], [2, 0, 30, 0]],
 "nodes": {
 "2": {
 "auto_connect": false,
@@ -35,16 +34,16 @@ Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
 "30": {
 "auto_connect": false,
 "gui_position": Vector2(0, 100),
-"max": 300.0,
-"min": -300.0,
+"max": 150.0,
+"min": -150.0,
 "name": &"Clamp Y (-300 to 300)",
 "type": "ClampC"
 },
 "31": {
 "auto_connect": false,
-"b": 15.0,
+"b": 100.0,
 "gui_position": Vector2(300, 120),
-"name": &"y / 15",
+"name": &"y / 100",
 "type": "Divide"
 },
 "32": {
@@ -57,7 +56,7 @@ Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
 "33": {
 "auto_connect": false,
 "gui_position": Vector2(880, 40),
-"name": &"Dichte: ((y/15)*-1) + Noise",
+"name": &"Dichte: ((y/100)*-1) + Noise",
 "type": "Add"
 },
 "34": {
@@ -68,7 +67,7 @@ Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
 },
 "35": {
 "auto_connect": false,
-"b": 0.8,
+"b": 0.0,
 "gui_position": Vector2(1520, 100),
 "type": "Add"
 },
@@ -79,23 +78,17 @@ Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
 "min": 0.0,
 "type": "Clamp"
 },
-"38": {
+"37": {
 "auto_connect": true,
-"gui_position": Vector2(560, 480),
-"noise": SubResource("ZN_FastNoiseLite_fmx4h"),
+"gui_position": Vector2(400, 460),
+"noise": SubResource("ZN_FastNoiseLite_72ylf"),
 "type": "FastNoise2D",
 "x": 0.0,
 "y": 0.0
 },
-"40": {
-"auto_connect": false,
-"gui_position": Vector2(560, 400),
-"text": "noises give value from -1 to 1",
-"type": "Comment"
-},
 "6": {
 "auto_connect": false,
-"gui_position": Vector2(2220, 300),
+"gui_position": Vector2(2020, 120),
 "type": "OutputType"
 },
 "8": {
