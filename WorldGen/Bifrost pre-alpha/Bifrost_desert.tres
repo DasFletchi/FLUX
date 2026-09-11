@@ -1,11 +1,11 @@
-[gd_resource type="VoxelGeneratorGraph" format=3 uid="uid://dkifvvaxqxgq"]
+[gd_resource type="VoxelGeneratorGraph" format=3 uid="uid://do2jhlf8ys0v7"]
 
 [sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_i7141"]
-period = 118.6001
+period = 50.0001
 
 [resource]
 graph_data = {
-"connections": [[33, 0, 34, 0], [30, 0, 31, 0], [2, 0, 30, 0], [31, 0, 32, 0], [32, 0, 33, 0], [34, 0, 35, 0], [35, 0, 36, 0], [36, 0, 6, 0], [8, 0, 33, 1]],
+"connections": [[46, 0, 6, 0], [33, 0, 34, 0], [30, 0, 31, 0], [2, 0, 30, 0], [31, 0, 32, 0], [32, 0, 33, 0], [34, 0, 35, 0], [35, 0, 36, 0], [36, 0, 46, 2], [8, 0, 33, 1]],
 "nodes": {
 "2": {
 "auto_connect": false,
@@ -72,13 +72,21 @@ Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
 "36": {
 "auto_connect": false,
 "gui_position": Vector2(1820, 80),
-"max": 3.0,
+"max": 4.0,
 "min": 0.0,
 "type": "Clamp"
 },
+"46": {
+"a": 0.0,
+"auto_connect": false,
+"b": 4.0,
+"gui_position": Vector2(2140, 60),
+"threshold": 0.5,
+"type": "Select"
+},
 "6": {
 "auto_connect": false,
-"gui_position": Vector2(2040, 100),
+"gui_position": Vector2(2420, 140),
 "type": "OutputType"
 },
 "8": {

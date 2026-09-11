@@ -1,11 +1,13 @@
-[gd_resource type="VoxelGeneratorGraph" format=3 uid="uid://do2jhlf8ys0v7"]
+[gd_resource type="VoxelGeneratorGraph" format=3 uid="uid://bee2kgbars6i0"]
 
 [sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_i7141"]
-period = 50.0001
+period = 118.6001
+
+[sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_72ylf"]
 
 [resource]
 graph_data = {
-"connections": [[46, 0, 6, 0], [33, 0, 34, 0], [30, 0, 31, 0], [2, 0, 30, 0], [31, 0, 32, 0], [32, 0, 33, 0], [34, 0, 35, 0], [35, 0, 36, 0], [36, 0, 46, 2], [8, 0, 33, 1]],
+"connections": [[41, 0, 44, 2], [40, 0, 41, 0], [33, 0, 34, 0], [30, 0, 31, 0], [2, 0, 30, 0], [31, 0, 32, 0], [32, 0, 33, 0], [34, 0, 35, 0], [35, 0, 36, 0], [36, 0, 6, 0], [8, 0, 33, 1], [37, 0, 40, 0]],
 "nodes": {
 "2": {
 "auto_connect": false,
@@ -53,7 +55,7 @@ Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
 },
 "33": {
 "auto_connect": false,
-"gui_position": Vector2(740, 80),
+"gui_position": Vector2(880, 40),
 "name": &"Dichte: ((y/100)*-1) + Noise",
 "type": "Add"
 },
@@ -72,26 +74,61 @@ Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
 "36": {
 "auto_connect": false,
 "gui_position": Vector2(1820, 80),
-"max": 4.0,
+"max": 3.0,
 "min": 0.0,
 "type": "Clamp"
 },
-"46": {
-"a": 0.0,
+"37": {
+"auto_connect": true,
+"gui_position": Vector2(-180, 480),
+"noise": SubResource("ZN_FastNoiseLite_72ylf"),
+"type": "FastNoise2D",
+"x": 0.0,
+"y": 0.0
+},
+"38": {
 "auto_connect": false,
-"b": 4.0,
-"gui_position": Vector2(2140, 60),
-"threshold": 0.5,
+"gui_position": Vector2(-120, 620),
+"text": "meadow 1 desert 0",
+"type": "Comment"
+},
+"40": {
+"auto_connect": false,
+"gui_position": Vector2(120, 480),
+"max": 1.0,
+"min": -1.0,
+"type": "Clamp"
+},
+"41": {
+"auto_connect": false,
+"gui_position": Vector2(360, 520),
+"name": &"biome id",
+"step": 1.0,
+"type": "Stepify"
+},
+"42": {
+"auto_connect": false,
+"gui_position": Vector2(360, 620),
+"text": "layer id",
+"type": "Comment"
+},
+"44": {
+"a": 1.0,
+"auto_connect": false,
+"b": 0.0,
+"gui_position": Vector2(620, 520),
+"name": &"FINAL (BETA) BIOME ID",
+"threshold": 0.0,
 "type": "Select"
 },
 "6": {
 "auto_connect": false,
-"gui_position": Vector2(2420, 140),
+"gui_position": Vector2(2040, 100),
 "type": "OutputType"
 },
 "8": {
 "auto_connect": true,
-"gui_position": Vector2(520, 220),
+"gui_position": Vector2(580, 260),
 "noise": SubResource("ZN_FastNoiseLite_i7141"),
 "type": "FastNoise3D",
 "x": 0.0,
