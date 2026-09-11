@@ -55,7 +55,7 @@ Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
 },
 "33": {
 "auto_connect": false,
-"gui_position": Vector2(880, 40),
+"gui_position": Vector2(740, 80),
 "name": &"Dichte: ((y/100)*-1) + Noise",
 "type": "Add"
 },
@@ -121,6 +121,12 @@ Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
 "threshold": 0.0,
 "type": "Select"
 },
+"45": {
+"auto_connect": false,
+"gui_position": Vector2(1112.7161, 380.66605),
+"text": "fuck",
+"type": "Comment"
+},
 "6": {
 "auto_connect": false,
 "gui_position": Vector2(2040, 100),
@@ -128,7 +134,7 @@ Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
 },
 "8": {
 "auto_connect": true,
-"gui_position": Vector2(580, 260),
+"gui_position": Vector2(520, 220),
 "noise": SubResource("ZN_FastNoiseLite_i7141"),
 "type": "FastNoise3D",
 "x": 0.0,
