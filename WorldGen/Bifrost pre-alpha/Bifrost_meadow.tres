@@ -3,11 +3,9 @@
 [sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_i7141"]
 period = 118.6001
 
-[sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_72ylf"]
-
 [resource]
 graph_data = {
-"connections": [[41, 0, 44, 2], [40, 0, 41, 0], [33, 0, 34, 0], [30, 0, 31, 0], [2, 0, 30, 0], [31, 0, 32, 0], [32, 0, 33, 0], [34, 0, 35, 0], [35, 0, 36, 0], [36, 0, 6, 0], [8, 0, 33, 1], [37, 0, 40, 0]],
+"connections": [[33, 0, 34, 0], [30, 0, 31, 0], [2, 0, 30, 0], [31, 0, 32, 0], [32, 0, 33, 0], [34, 0, 35, 0], [35, 0, 36, 0], [36, 0, 6, 0], [8, 0, 33, 1]],
 "nodes": {
 "2": {
 "auto_connect": false,
@@ -77,49 +75,6 @@ Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
 "max": 3.0,
 "min": 0.0,
 "type": "Clamp"
-},
-"37": {
-"auto_connect": true,
-"gui_position": Vector2(-180, 480),
-"noise": SubResource("ZN_FastNoiseLite_72ylf"),
-"type": "FastNoise2D",
-"x": 0.0,
-"y": 0.0
-},
-"38": {
-"auto_connect": false,
-"gui_position": Vector2(-120, 620),
-"text": "meadow 1 desert 0",
-"type": "Comment"
-},
-"40": {
-"auto_connect": false,
-"gui_position": Vector2(120, 480),
-"max": 1.0,
-"min": -1.0,
-"type": "Clamp"
-},
-"41": {
-"auto_connect": false,
-"gui_position": Vector2(360, 520),
-"name": &"biome id",
-"step": 1.0,
-"type": "Stepify"
-},
-"42": {
-"auto_connect": false,
-"gui_position": Vector2(360, 620),
-"text": "layer id",
-"type": "Comment"
-},
-"44": {
-"a": 1.0,
-"auto_connect": false,
-"b": 0.0,
-"gui_position": Vector2(620, 520),
-"name": &"FINAL (BETA) BIOME ID",
-"threshold": 0.0,
-"type": "Select"
 },
 "6": {
 "auto_connect": false,
