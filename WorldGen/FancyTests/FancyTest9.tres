@@ -61,7 +61,7 @@ Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
 },
 "34": {
 "auto_connect": false,
-"gui_position": Vector2(1260, 80),
+"gui_position": Vector2(1280, 60),
 "step": 1.0,
 "type": "Stepify"
 },
