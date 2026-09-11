@@ -56,7 +56,7 @@ ENGLISH:
 },
 "21": {
 "auto_connect": false,
-"gui_position": Vector2(60, 60),
+"gui_position": Vector2(60, 40),
 "gui_size": Vector2(145.85327, 81.115845),
 "text": "Multiply that so it fits
 with the FastNoise3D",
