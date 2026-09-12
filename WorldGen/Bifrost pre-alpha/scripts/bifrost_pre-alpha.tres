@@ -1,7 +1,7 @@
 [gd_resource type="VoxelGeneratorScript" format=3 uid="uid://b3upxh7ujica6"]
 
 [ext_resource type="VoxelGeneratorGraph" uid="uid://do2jhlf8ys0v7" path="res://WorldGen/Bifrost pre-alpha/Bifrost_desert.tres" id="1_52iau"]
-[ext_resource type="VoxelGeneratorGraph" uid="uid://bee2kgbars6i0" path="res://WorldGen/Bifrost pre-alpha/Bifrost_meadow.tres" id="2_0d5tf"]
+[ext_resource type="VoxelGeneratorGraph" uid="uid://bee2kgbars6i0" path="res://WorldGen/FancyTests/FancyTest9.tres" id="2_0d5tf"]
 [ext_resource type="Script" uid="uid://bsrmqs0r607co" path="res://scripts/Bifrost pre-alpha/bifrost_dispatcher.gd" id="3_ppy1k"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_k7hc8"]
