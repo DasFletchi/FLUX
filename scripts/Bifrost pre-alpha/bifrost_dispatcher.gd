@@ -10,7 +10,7 @@ func _get_used_channels_mask() -> int: #bevor wir viel platz pro chunk wasten sa
 	return 1 << VoxelBuffer.CHANNEL_TYPE #Voxelbuffer ist die schüssel in die die ganzen voxel reinkommen, warum das so geschrieben werden muss checke ich nicht aber idc wir werden nur einen terrain generator schreiben (hoffe ich lowk)
 
 func _generate_block(out_buffer: VoxelBuffer, origin_in_voxels: Vector3i, lod: int) -> void:
-#calcucate the middle of the chunk
+	#calcucate the middle of the chunk
 	var chunk_center_x := origin_in_voxels.x + 8 #the "." before the "=" does that godot does jnt have to check everytime if the var has changed, wich gives us a little squeeze of performance more.
 	var chunk_center_z := origin_in_voxels.z + 8 #we just do that for more accurate biomes
 	var noise_val := 0.0

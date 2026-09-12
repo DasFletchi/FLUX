@@ -1,7 +1,7 @@
 [gd_resource type="VoxelGeneratorGraph" format=3 uid="uid://do2jhlf8ys0v7"]
 
 [sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_i7141"]
-period = 50.0001
+period = 254.5001
 
 [resource]
 graph_data = {
