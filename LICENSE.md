@@ -109,6 +109,13 @@ development, discussion, education, and contribution purposes, provided that:
 Publishing source code does not grant permission to distribute compiled builds.
 
 
+This license applies only to original FLUX code, assets, content, branding,
+and documentation created by DasFletchi.
+
+Third-party components located in the addons/ directory are governed by their
+own licenses. Those licenses are listed in their addon folder unchanged.
+
+
 ## Credits
 
 Created by:
