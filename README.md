@@ -11,6 +11,22 @@ You can find the current [GDD](https://docs.google.com/document/d/11Ip6rSM0H4UV5
 * Netfox
 * Netfox.Noray
 
-FLUX is a solo project, but contributions and Pull Requests are welcome.
+# CONTRIBUTING
 
-See `LICENSE.md` for the license.
+Thank you for contributing to FLUX. By contributing you confirm you have the right to submit the code/assets and agree they may be used under the project's license.
+
+### Please:
+- Keep PRs focused and well‑documented.
+- Include license references for any third‑party code or assets you add and confirm you have the right to contribute them.
+- Add a Signed‑off‑by line in commits or the PR description (DCO‑style).
+- Do not submit AI‑generated code. I may use AI tools for pair‑programming or, but I only commit code that I personally wrote, fully reviewed, and understand. If you use AI assistance, do not paste raw AI output into a PR: adapt and verify it yourself, and disclose the use of AI clearly in the PR description. Contributors must follow the same practice.
+
+# THIRD-PARTY / NOTICE
+
+This repository includes third-party components. Known third-party items:
+- addons/zylann.voxel — MIT (see addons/zylann.voxel/LICENSE.md)
+- addons/netfox — MIT (see addons/netfox/LICENSE.md)
+- addons/netfox.noray — MIT (see addons/netfox.noray/README.md or LICENSE)
+
+# Copyright (c) 2026 DasFletchi
+# Licensed under the FLUX Source Available License — see LICENSE.md
