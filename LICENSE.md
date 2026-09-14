@@ -96,6 +96,19 @@ Only the copyright holder or an expressly authorized distributor may
 distribute compiled versions of FLUX.
 
 
+## Source Forks and Modifications
+
+You may fork, modify, and publish the FLUX source code for non-commercial
+development, discussion, education, and contribution purposes, provided that:
+
+1. all copyright, attribution, and license notices remain intact;
+2. the fork clearly states that it is unofficial and not an official FLUX release;
+3. no compiled or executable version is distributed to third parties; and
+4. the fork does not use the official FLUX branding in a misleading manner.
+
+Publishing source code does not grant permission to distribute compiled builds.
+
+
 ## Credits
 
 Created by:
