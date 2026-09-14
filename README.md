@@ -27,6 +27,5 @@ This repository includes third-party components. Known third-party items:
 - addons/zylann.voxel — MIT (see addons/zylann.voxel/LICENSE.md)
 - addons/netfox — MIT (see addons/netfox/LICENSE.md)
 - addons/netfox.noray — MIT (see addons/netfox.noray/README.md or LICENSE)
-
-# Copyright (c) 2026 DasFletchi
 # Licensed under the FLUX Source Available License — see LICENSE.md
+Copyright (c) 2026 DasFletchi
