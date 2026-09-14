@@ -71,7 +71,32 @@ Compiling the source code for personal use is allowed, but purchasing official r
 
 Commercial use of FLUX or any part of the project is strictly prohibited.
 
-## 9. Credits
+
+## Compiled Builds and Redistribution
+
+You may obtain, inspect, modify, and compile the FLUX source code for
+personal use.
+
+You may not distribute, publish, upload, mirror, share, sublicense, sell,
+rent, give away, or otherwise make available any compiled, packaged, or
+executable version of FLUX or a modified version of FLUX to any third party,
+whether commercially or free of charge.
+
+This restriction includes, but is not limited to:
+
+- executable game builds;
+- installers;
+- portable packages;
+- archives containing playable builds;
+- builds distributed through websites, file hosts, torrents, stores,
+  launchers, or peer-to-peer networks;
+- modified or rebranded builds based on FLUX.
+
+Only the copyright holder or an expressly authorized distributor may
+distribute compiled versions of FLUX.
+
+
+## Credits
 
 Created by:
 
