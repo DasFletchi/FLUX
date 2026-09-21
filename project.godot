@@ -11,9 +11,11 @@ config_version=5
 [application]
 
 config/name="FLUX"
+config/description="A Survival-Physics-Sandbox"
 run/main_scene="uid://daamophqprcvi"
 config/features=PackedStringArray("4.7", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/image="uid://c1u08mpwjbvoo"
+config/icon="uid://c1u08mpwjbvoo"
 
 [autoload]
 
@@ -41,6 +43,7 @@ enabled=PackedStringArray("res://addons/netfox.internals/plugin.cfg", "res://add
 folder_colors={
 "res://WorldGen/": "purple",
 "res://addons/": "gray",
+"res://assets/": "blue",
 "res://documents/": "pink",
 "res://scenes/": "teal",
 "res://scripts/": "yellow"
