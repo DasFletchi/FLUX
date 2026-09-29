@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://daamophqprcvi"]
 
 [ext_resource type="VoxelGeneratorScript" uid="uid://b3upxh7ujica6" path="res://WorldGen/Bifrost pre-alpha/scripts/bifrost_pre-alpha.tres" id="1_4mrxx"]
+[ext_resource type="Script" uid="uid://caj8jq3r7iggy" path="res://scripts/world.gd" id="1_7r4gi"]
 [ext_resource type="Material" path="res://scenes/blocks/materials/grass.tres" id="1_grass"]
 [ext_resource type="Material" path="res://scenes/blocks/materials/dirt.tres" id="2_dirt"]
 [ext_resource type="PackedScene" uid="uid://bjx5b7kd2kx74" path="res://scenes/player.tscn" id="2_rwgxs"]
@@ -46,6 +47,8 @@ models = Array[VoxelBlockyModel]([null, SubResource("VoxelBlockyModelCube_grass"
 library = SubResource("VoxelBlockyLibrary_rwgxs")
 
 [node name="World" type="Node3D" unique_id=1825888102]
+script = ExtResource("1_7r4gi")
+player_scene = ExtResource("2_rwgxs")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1427791661]
 environment = SubResource("Environment_4wyf3")
@@ -71,6 +74,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.592503, 12.425653, 0)
 offset_right = 1920.0
 offset_bottom = 69.585
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="HOST" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=1145044697]
 custom_minimum_size = Vector2(0, 100)
@@ -81,3 +85,9 @@ text = "HOST"
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 text = "JOIN"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=626604139]
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HOST" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/JOIN" to="." method="_on_join_pressed"]
