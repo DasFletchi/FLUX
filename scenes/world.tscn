@@ -60,5 +60,24 @@ generator = ExtResource("1_4mrxx")
 mesher = SubResource("VoxelMesherBlocky_nnsk1")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
+[node name="VoxelTerrainMultiplayerSynchronizer" type="VoxelTerrainMultiplayerSynchronizer" parent="VoxelTerrain" unique_id=1344636923]
+
 [node name="Player" parent="." unique_id=703562591 instance=ExtResource("2_rwgxs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.592503, 12.425653, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=907275412]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1299440453]
+offset_right = 1920.0
+offset_bottom = 69.585
+size_flags_horizontal = 3
+
+[node name="HOST" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=1145044697]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "HOST"
+
+[node name="JOIN" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=1077715399]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "JOIN"

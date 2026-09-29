@@ -7,7 +7,6 @@ extends CharacterBody3D
 @export var JUMP_VELOCITY = 6.42
 @export var mouse_sensitivity: float = 0.002
 
-
 var current_speed
 var jump_cooldown: float = 0.0
 

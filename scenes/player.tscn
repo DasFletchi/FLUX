@@ -26,14 +26,3 @@ view_distance_vertical_ratio = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1467183820]
 shape = SubResource("CapsuleShape3D_player")
-
-[node name="Decor" type="Node3D" parent="." unique_id=596114069]
-visible = false
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Decor" unique_id=1386080958]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.27655888, 0.6934494, -0.49623942)
-material = ExtResource("2_g2els")
-
-[node name="CSGSphere3D2" type="CSGSphere3D" parent="Decor" unique_id=240261173]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.22863841, 0.6934494, -0.49623942)
-material = ExtResource("2_g2els")
