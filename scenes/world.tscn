@@ -87,6 +87,7 @@ layout_mode = 2
 text = "JOIN"
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=626604139]
+_spawnable_scenes = PackedStringArray("uid://bjx5b7kd2kx74")
 spawn_path = NodePath("..")
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/HOST" to="." method="_on_host_pressed"]
