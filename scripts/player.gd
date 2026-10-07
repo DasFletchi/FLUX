@@ -7,33 +7,40 @@ extends CharacterBody3D
 @export var mouse_sensitivity: float = 0.002
 @onready var camera_3d: Camera3D = $Camera3D
 
-
 var current_speed
 var jump_cooldown: float = 0.0
+var _first_tick: bool = true
 
-
+	
 func _enter_tree() -> void:
-	set_multiplayer_authority(name.to_int()) #gives each player authority over the correct character.
+	var auth_id = name.to_int()
+	set_multiplayer_authority(auth_id) #gives each player authority over the correct character.
+	print("[PLAYER '", name, "'] _enter_tree: Setting authority to ", auth_id, " | Local peer ID is: ", multiplayer.get_unique_id())
 
 
 func _ready() -> void:
+	print("[PLAYER '", name, "'] _ready: Node Authority is ", get_multiplayer_authority(), " | is_multiplayer_authority()? ", is_multiplayer_authority(), " | Position: ", global_position)
 	var terrain = get_parent().get_node_or_null("VoxelTerrain") #zieht sich die voxel terrain node und ist fine wenn er null kriegt
 	if terrain: #wenn er einen terrain findet/wenn terrain fine ist
+		print("[PLAYER '", name, "'] Waiting for terrain to mesh at ", global_position, "...")
 		set_physics_process(false)
 		while not terrain.is_area_meshed(AABB(terrain.to_local(global_position) - Vector3(1, 2, 1), Vector3(2, 2, 2))): #hier braucht man warum auch immer diesen crazy shit we mit to local weil wir unsere welt ja in der transform auf 0.25 haben. und mit dem vecor minus ding type shit da das ist für die AABB, wo die spawnen soll und checken soll
 			await get_tree().process_frame #ALLES WAS IN READY UNTER DIESER SCHLEIFE STEHT SKIPPEN
+		print("[PLAYER '", name, "'] Terrain meshed! Resuming physics process.")
 		set_physics_process(true)
 	
 	
-	
-	
 	if is_multiplayer_authority():
+		print("[PLAYER '", name, "'] Making Camera3D current because we have authority.")
 		camera_3d.make_current()
-
-
+	else:
+		print("[PLAYER '", name, "'] Skipping Camera3D because we do NOT have authority.")
 
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():
+		if _first_tick:
+			_first_tick = false
+			print("[PLAYER '", name, "'] Physics process is actively running!")
 		if Input.is_action_just_pressed("esc"):
 			toggle_mm()	
 		
@@ -50,8 +57,6 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_pressed("space") and is_on_floor() and jump_cooldown <= 0.0:
 			velocity.y = JUMP_VELOCITY
 			jump_cooldown = auto_jump_cooldown
-		
-		
 		
 		# Get the input direction.
 		var input_dir := Input.get_vector("a", "d", "w", "s")
@@ -70,14 +75,10 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, current_speed)
 			velocity.z = move_toward(velocity.z, 0, current_speed)
 		move_and_slide()
-		
-
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_multiplayer_authority():
 		return
-
-
 
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * mouse_sensitivity)
@@ -90,3 +91,4 @@ func toggle_mm():
 			Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		print("[PLAYER '", name, "'] Mouse mode toggled to: ", Input.mouse_mode)

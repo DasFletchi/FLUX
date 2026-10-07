@@ -9,32 +9,54 @@ var PORT = 6931
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 
 
+func _ready() -> void:
+	multiplayer.connected_to_server.connect(func(): print("[NET CLIENT] Connected to server! My peer ID: ", multiplayer.get_unique_id()))
+	multiplayer.connection_failed.connect(func(): print("[NET CLIENT ERROR] Connection to server failed!"))
+	multiplayer.server_disconnected.connect(func(): print("[NET CLIENT] Server disconnected!"))
+	multiplayer.peer_connected.connect(func(id): print("[NET EVENT] Peer connected with ID: ", id))
+	multiplayer.peer_disconnected.connect(func(id): print("[NET EVENT] Peer disconnected with ID: ", id))
+
+
 func _on_host_pressed() -> void:
-	enet_peer.create_server(PORT)
+	print("[WORLD] HOST button pressed.")
+	var err = enet_peer.create_server(PORT)
+	print("[WORLD] create_server result: ", err, " (0 = OK)")
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.peer_connected.connect(add_player)
 	canvas_layer.hide()
+	print("[WORLD] Spawning host with add_player(1)... My unique ID: ", multiplayer.get_unique_id())
 	add_player(1) #1 in godot always means authority
 
 func _on_join_pressed() -> void:
+	print("[WORLD] JOIN button pressed.")
 	multiplayer.multiplayer_peer = enet_peer
-	enet_peer.create_client("localhost", PORT)
+	var err = enet_peer.create_client("localhost", PORT)
+	print("[WORLD] create_client result: ", err, " (0 = OK) | My unique ID: ", multiplayer.get_unique_id())
 	canvas_layer.hide()
+	print("[WORLD] Calling add_player(name.to_int())... World node name: '", name, "' -> name.to_int(): ", name.to_int())
 	add_player(name.to_int()) #just make his name his network adrress
 
 func add_player(id = 1):
+	print("[WORLD] add_player called with id: ", id)
 	var player = player_scene.instantiate()
 	player.name =  str(id) #I think we can change that name with something the use rcan come up with its own mind, it just needs to be a a unique name per session
+	print("[WORLD] Instantiated player with node name: '", player.name, "'. Adding child deferred...")
 	call_deferred("add_child", player) #call deferred just means "call this when youre finished with your current task"
 
 
 func kick_player(id):
+	print("[WORLD] kick_player called for id: ", id)
 	rpc("_kick_player", id)
+
+
+
 @rpc("any_peer", "call_local")
-
-
 func _kick_player(id):
-	get_node(str(id)).queue_free()
+	print("[WORLD] _kick_player called for id: ", id)
+	if has_node(str(id)):
+		get_node(str(id)).queue_free()
+	else:
+		print("[WORLD ERROR] Node '", str(id), "' not found to remove!")
 
 
 func exit_game(id):
