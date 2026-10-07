@@ -36,5 +36,5 @@ view_distance_vertical_ratio = 0.5
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1467183820]
 shape = SubResource("CapsuleShape3D_player")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1371063107]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1430361896]
 replication_config = SubResource("SceneReplicationConfig_g2els")
