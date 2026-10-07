@@ -1,11 +1,11 @@
 extends CharacterBody3D
 
-
 @export var SPEED = 4.317
 @export var auto_jump_cooldown = 0.3
 @export var JUMP_VELOCITY = 6.42
 @export var mouse_sensitivity: float = 0.002
 @onready var camera_3d: Camera3D = $Camera3D
+@onready var voxel_viewer: VoxelViewer = $VoxelViewer
 
 var current_speed
 var jump_cooldown: float = 0.0
@@ -16,6 +16,10 @@ func _enter_tree() -> void:
 	var auth_id = name.to_int()
 	set_multiplayer_authority(auth_id) #gives each player authority over the correct character.
 	print("[PLAYER '", name, "'] _enter_tree: Setting authority to ", auth_id, " | Local peer ID is: ", multiplayer.get_unique_id())
+	
+	if multiplayer.is_server() and auth_id != 1:#This does not cancel each other out because the multiplayer.is_server() checks if you are the machine that pressed the host button, and remember our game is host authoritative so we control and have access to every node. And then we check with auth_id if the current node is not the host, so we can do TeamViewer type shit and control the other player's VoxelViewer. 
+		$VoxelViewer.set_network_peer_id(auth_id)
+		$VoxelViewer.requires_data_block_notifications = true
 
 
 func _ready() -> void:
@@ -35,6 +39,7 @@ func _ready() -> void:
 		camera_3d.make_current()
 	else:
 		print("[PLAYER '", name, "'] Skipping Camera3D because we do NOT have authority.")
+
 
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():
