@@ -20,7 +20,7 @@ func _on_join_pressed() -> void:
 	multiplayer.multiplayer_peer = enet_peer
 	enet_peer.create_client("localhost", PORT)
 	canvas_layer.hide()
-	add_player(name.to_int())
+	add_player(name.to_int()) #just make his name his network adrress
 
 func add_player(id = 1):
 	var player = player_scene.instantiate()
