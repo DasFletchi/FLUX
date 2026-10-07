@@ -18,7 +18,7 @@ func _enter_tree() -> void:
 	print("[PLAYER '", name, "'] _enter_tree: Setting authority to ", auth_id, " | Local peer ID is: ", multiplayer.get_unique_id())
 	
 	if multiplayer.is_server() and auth_id != 1:#This does not cancel each other out because the multiplayer.is_server() checks if you are the machine that pressed the host button, and remember our game is host authoritative so we control and have access to every node. And then we check with auth_id if the current node is not the host, so we can do TeamViewer type shit and control the other player's VoxelViewer. 
-		$VoxelViewer.set_network_peer_id(auth_id)
+		$VoxelViewer.set_network_peer_id(auth_id) #You just have to use the function because I guess `zylann.voxel` is just built like that and feels like a C++ quirk of `zylann.voxel`. 
 		$VoxelViewer.requires_data_block_notifications = true
 
 
