@@ -1,6 +1,6 @@
 extends Node3D
 
-var peer = ENetMultiplayerPeer.new()
+var enet_peer = ENetMultiplayerPeer.new()
 var PORT = 6931
 @export var player_scene : PackedScene
 
@@ -10,13 +10,13 @@ var PORT = 6931
 
 
 func _on_host_pressed() -> void:
-	peer.create_server(PORT)
-	multiplayer.multiplayer_peer = peer
+	enet_peer.create_server(PORT)
+	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.peer_connected.connect(add_player)
 	canvas_layer.hide()
 
 func _on_join_pressed() -> void:
-	peer.create_client("localhost", PORT)
+	enet_peer.create_client("localhost", PORT)
 	canvas_layer.hide()
 
 

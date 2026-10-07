@@ -1,13 +1,12 @@
 extends CharacterBody3D
 
-@onready var camera_3d: Camera3D = $Camera3D
 
 @export var SPEED = 4.317
 @export var auto_jump_cooldown = 0.3
 @export var JUMP_VELOCITY = 6.42
 @export var mouse_sensitivity: float = 0.002
+@onready var camera_3d: Camera3D = $Camera3D
 
-@onready var cam: Camera3D = $Camera3D
 
 var current_speed
 var jump_cooldown: float = 0.0
@@ -28,8 +27,8 @@ func _ready() -> void:
 	
 	
 	
-	
-	cam.current = is_multiplayer_authority()
+	if is_multiplayer_authority():
+		camera_3d.make_current()
 
 
 
@@ -82,7 +81,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func toggle_mm():
 	if Input.is_action_just_pressed("esc"):
-		if Input.MOUSE_MODE_CAPTURED:
-			Input.MOUSE_MODE_CONFINED
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED: #input mouse mode is the actual var we can read this from
+			Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 		else:
-			Input.MOUSE_MODE_CAPTURED
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
