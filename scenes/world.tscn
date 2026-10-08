@@ -83,6 +83,11 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 text = "JOIN"
 
+[node name="JoinLineEdit" type="LineEdit" parent="CanvasLayer/VBoxContainer" unique_id=1656457405]
+layout_mode = 2
+text = "SESSION CODE"
+alignment = 1
+
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=626604139]
 _spawnable_scenes = PackedStringArray("uid://bjx5b7kd2kx74")
 spawn_path = NodePath("..")

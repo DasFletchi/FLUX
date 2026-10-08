@@ -11,7 +11,6 @@ var current_speed
 var jump_cooldown: float = 0.0
 var _first_tick: bool = true
 
-	
 func _enter_tree() -> void:
 	var auth_id = name.to_int()
 	set_multiplayer_authority(auth_id) #gives each player authority over the correct character.

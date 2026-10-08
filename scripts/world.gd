@@ -1,12 +1,15 @@
 extends Node3D
 
 var enet_peer = ENetMultiplayerPeer.new()
-var PORT = 6931
 @export var player_scene : PackedScene
 
 @onready var host: Button = $CanvasLayer/VBoxContainer/HOST
 @onready var join: Button = $CanvasLayer/VBoxContainer/JOIN
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
+@onready var join_line_edit: LineEdit = $CanvasLayer/VBoxContainer/JoinLineEdit
+
+const NORAY_HOST = "tomfol.io"
+const NORAY_PORT = 8890 #i cant just imageine a random fucking code right here because the noray server only listens to that port.
 
 
 func _ready() -> void:
@@ -17,21 +20,46 @@ func _ready() -> void:
 	multiplayer.peer_disconnected.connect(func(id): print("[NET EVENT] Peer disconnected with ID: ", id))
 
 func _on_host_pressed() -> void:
+	var errConnectNorayRelayServer = await Noray.connect_to_host(NORAY_HOST, NORAY_PORT)
+	print("[WORLD] Noray.connect_to_host(NORAY_HOST, NORAY_PORT) result: ", errConnectNorayRelayServer, " (0 = OK)")
 	print("[WORLD] HOST button pressed.")
-	var err = enet_peer.create_server(PORT)
+	var errNorayRegisterHost = Noray.register_host()
+	print("[WORLD] Registering Noray host")
+	print("[WORLD] Noray.register_host() result: ", errNorayRegisterHost, " (0 = OK)")
+	await Noray.on_pid
+	print("[WORLD] MY OID: ", Noray.oid)
+	await Noray.register_remote()
+	print("[WORLD] My own port: ", Noray.local_port)
+	var err = enet_peer.create_server(Noray.local_port)
 	print("[WORLD] create_server result: ", err, " (0 = OK)")
 	multiplayer.multiplayer_peer = enet_peer
+	Noray.on_connect_nat.connect(nat_connect)
+	Noray.on_connect_relay.connect(relay_connect)
 	canvas_layer.hide()
 	print("[WORLD] Spawning host with add_player(1)... My unique ID: ", multiplayer.get_unique_id())
-	add_player(1) #1 in godot always means authority
+	add_player(1)
 
 func _on_join_pressed() -> void:
 	print("[WORLD] JOIN button pressed.")
-	var err = enet_peer.create_client("localhost", PORT)
-	multiplayer.multiplayer_peer = enet_peer
-	print("[WORLD] create_client result: ", err, " (0 = OK) | My unique ID: ", multiplayer.get_unique_id())
+	await Noray.connect_to_host(NORAY_HOST, NORAY_PORT)
+	print("[WORLD] Connecting to Noray Server.")
+	join.hide()
+	join_line_edit.show()
+	var host_oid = join_line_edit.text
+	if host_oid.is_empty():
+		push_error("[WORLD] Insert OID code please")
+		return
+	var err = Noray.register_host()
+	print("Noray Registering host ERROR CODE: ", err)
+	
+	await Noray.on_pid
+	await Noray.register_remote()
+	Noray.on_connect_nat.connect(join_game)
+	print("trying to join game over nat")
+	Noray.on_connect_relay.connect(join_game)
+	print("trying to join game over relay")
+	Noray.connect_nat(host_oid)
 	canvas_layer.hide()
-	print("[WORLD] Calling add_player(name.to_int())... World node name: '", name, "' -> name.to_int(): ", name.to_int())
 
 
 func add_player(id = 1):
@@ -65,3 +93,16 @@ func _on_peer_connected(id):
 		return
 	print("New player joined! Network ID: ", id)
 	add_player(id)
+
+func nat_connect(address: String, port: int) -> void:
+	await PacketHandshake.over_enet_peer(enet_peer, address, port)
+	print("[MultiplayerManager] NAT connection from: ", address, ":", port)
+
+func relay_connect(address: String, port: int) -> void:
+	await PacketHandshake.over_enet_peer(enet_peer, address, port)
+	print("[MultiplayerManager] Relay connection from: ", address, ":", port)
+
+
+func join_game(address: String, port: int) -> void:
+	enet_peer.create_client(address, port, 0, 0, 0, Noray.local_port) #we need the zeros just because 0 means unlimited
+	multiplayer.multiplayer_peer = enet_peer #we cant do this before hand because godot only takes stuff that arent husks
