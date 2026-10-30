@@ -4,8 +4,12 @@ extends CharacterBody3D
 @export var auto_jump_cooldown = 0.3
 @export var JUMP_VELOCITY = 6.42
 @export var mouse_sensitivity: float = 0.002
+
+@onready var terrain = get_parent().get_node_or_null("VoxelTerrain") #zieht sich die voxel terrain node und ist fine wenn er null kriegt
 @onready var camera_3d: Camera3D = $Camera3D
 @onready var voxel_viewer: VoxelViewer = $VoxelViewer
+@onready var voxel_tool : VoxelTool = terrain.get_voxel_tool()
+@onready var origin_mining_raycast: Marker3D = $OriginMiningRaycast
 
 var current_speed
 var jump_cooldown: float = 0.0
@@ -15,7 +19,6 @@ func _enter_tree() -> void:
 	var auth_id = name.to_int()
 	set_multiplayer_authority(auth_id) #gives each player authority over the correct character.
 	print("[PLAYER '", name, "'] _enter_tree: Setting authority to ", auth_id, " | Local peer ID is: ", multiplayer.get_unique_id())
-	
 	if multiplayer.is_server() and auth_id != 1:#This does not cancel each other out because the multiplayer.is_server() checks if you are the machine that pressed the host button, and remember our game is host authoritative so we control and have access to every node. And then we check with auth_id if the current node is not the host, so we can do TeamViewer type shit and control the other player's VoxelViewer. 
 		$VoxelViewer.set_network_peer_id(auth_id) #You just have to use the function because I guess `zylann.voxel` is just built like that and feels like a C++ quirk of `zylann.voxel`. 
 		$VoxelViewer.requires_data_block_notifications = true
@@ -23,7 +26,6 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	print("[PLAYER '", name, "'] _ready: Node Authority is ", get_multiplayer_authority(), " | is_multiplayer_authority()? ", is_multiplayer_authority(), " | Position: ", global_position)
-	var terrain = get_parent().get_node_or_null("VoxelTerrain") #zieht sich die voxel terrain node und ist fine wenn er null kriegt
 	if terrain: #wenn er einen terrain findet/wenn terrain fine ist
 		print("[PLAYER '", name, "'] Waiting for terrain to mesh at ", global_position, "...")
 		set_physics_process(false)
@@ -31,8 +33,6 @@ func _ready() -> void:
 			await get_tree().process_frame #ALLES WAS IN READY UNTER DIESER SCHLEIFE STEHT SKIPPEN
 		print("[PLAYER '", name, "'] Terrain meshed! Resuming physics process.")
 		set_physics_process(true)
-	
-	
 	if is_multiplayer_authority():
 		print("[PLAYER '", name, "'] Making Camera3D current because we have authority.")
 		camera_3d.make_current()
@@ -47,30 +47,24 @@ func _physics_process(delta: float) -> void:
 			print("[PLAYER '", name, "'] Physics process is actively running!")
 		if Input.is_action_just_pressed("esc"):
 			toggle_mm()	
-		
 		# Add the gravity.
 		if not is_on_floor():
 			velocity += get_gravity() * delta
-	 
 		# Handle jump.
 		if Input.is_action_just_pressed("space") and is_on_floor(): #you can still jump faster than that by murdering ur spacebar
 			velocity.y = JUMP_VELOCITY
-		
 		if jump_cooldown > 0.0: #Läuft die Stoppuhr gerade noch?
 			jump_cooldown -= delta #Ziehe die vergangene Zeit (0,016s) von der Restzeit ab.
 		if Input.is_action_pressed("space") and is_on_floor() and jump_cooldown <= 0.0:
 			velocity.y = JUMP_VELOCITY
 			jump_cooldown = auto_jump_cooldown
-		
 		# Get the input direction.
 		var input_dir := Input.get_vector("a", "d", "w", "s")
 		var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-
 		# 1. ZUERST den Speed für diesen Frame festlegen (bevor bewegt oder gebremst wird!)
 		current_speed = SPEED
 		if Input.is_action_pressed("shift"):
 			current_speed = SPEED * 1.3 # Setzt den Sprint-Speed sauber fest
-
 		# 2. JETZT die Bewegung berechnen
 		if direction:
 			velocity.x = direction.x * current_speed
@@ -83,7 +77,6 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_multiplayer_authority():
 		return
-
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		camera_3d.rotate_x(-event.relative.y * mouse_sensitivity)
@@ -96,3 +89,13 @@ func toggle_mm():
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		print("[PLAYER '", name, "'] Mouse mode toggled to: ", Input.mouse_mode)
+
+
+	if Input.is_action_just_pressed("break block"):
+		break_block()
+
+
+func break_block():
+	var del_voxel_result = voxel_tool.raycast(camera_3d.global_position, camera_3d.global_transform.basis.z, 3)
+	if del_voxel_result:
+		print(del_voxel_result.position)
