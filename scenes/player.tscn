@@ -38,3 +38,19 @@ shape = SubResource("CapsuleShape3D_player")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1430361896]
 replication_config = SubResource("SceneReplicationConfig_g2els")
+
+[node name="CrossAir" type="Control" parent="." unique_id=659248503]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="CrossAir" unique_id=300256858]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_font_sizes/font_size = 64
+text = "."
+horizontal_alignment = 1
+vertical_alignment = 1
