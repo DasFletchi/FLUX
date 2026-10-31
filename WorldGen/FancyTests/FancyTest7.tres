@@ -1,4 +1,4 @@
-[gd_resource type="VoxelGeneratorGraph" format=3 uid="uid://d4gxahvufoxof"]
+[gd_resource type="VoxelGeneratorGraph" format=3 uid="uid://detaaip1wurfn"]
 
 [sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_fmx4h"]
 period = 216.5001
