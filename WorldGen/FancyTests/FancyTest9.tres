@@ -7,11 +7,11 @@ period = 118.6001
 
 [resource]
 graph_data = {
-"connections": [[41, 0, 44, 2], [33, 0, 34, 0], [30, 0, 31, 0], [2, 0, 30, 0], [31, 0, 32, 0], [32, 0, 33, 0], [34, 0, 35, 0], [35, 0, 36, 0], [36, 0, 6, 0], [8, 0, 33, 1], [37, 0, 40, 0], [40, 0, 41, 0]],
+"connections": [[45, 0, 34, 0], [41, 0, 44, 2], [33, 0, 45, 0], [30, 0, 31, 0], [2, 0, 30, 0], [31, 0, 32, 0], [32, 0, 33, 0], [34, 0, 35, 0], [35, 0, 36, 0], [36, 0, 6, 0], [8, 0, 33, 1], [37, 0, 40, 0], [40, 0, 41, 0]],
 "nodes": {
 "2": {
 "auto_connect": false,
-"gui_position": Vector2(-160, 100),
+"gui_position": Vector2(-60, 40),
 "type": "InputY"
 },
 "20": {
@@ -33,7 +33,7 @@ Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
 },
 "30": {
 "auto_connect": false,
-"gui_position": Vector2(0, 100),
+"gui_position": Vector2(60, 40),
 "max": 150.0,
 "min": -150.0,
 "name": &"Clamp Y (-300 to 300)",
@@ -42,14 +42,14 @@ Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
 "31": {
 "auto_connect": false,
 "b": 100.0,
-"gui_position": Vector2(300, 120),
+"gui_position": Vector2(360, 40),
 "name": &"y / 100",
 "type": "Divide"
 },
 "32": {
 "auto_connect": false,
 "b": -1.0,
-"gui_position": Vector2(520, 100),
+"gui_position": Vector2(600, 40),
 "name": &"* -1",
 "type": "Multiply"
 },
@@ -61,19 +61,19 @@ Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
 },
 "34": {
 "auto_connect": false,
-"gui_position": Vector2(1280, 60),
+"gui_position": Vector2(1420, 40),
 "step": 1.0,
 "type": "Stepify"
 },
 "35": {
 "auto_connect": false,
 "b": 0.0,
-"gui_position": Vector2(1520, 100),
+"gui_position": Vector2(1640, 40),
 "type": "Add"
 },
 "36": {
 "auto_connect": false,
-"gui_position": Vector2(1820, 80),
+"gui_position": Vector2(1840, 40),
 "max": 3.0,
 "min": 0.0,
 "type": "Clamp"
@@ -121,14 +121,20 @@ Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
 "threshold": 0.0,
 "type": "Select"
 },
+"45": {
+"auto_connect": false,
+"b": 50.0,
+"gui_position": Vector2(1200, 40),
+"type": "Multiply"
+},
 "6": {
 "auto_connect": false,
-"gui_position": Vector2(2040, 100),
+"gui_position": Vector2(2000, 40),
 "type": "OutputType"
 },
 "8": {
 "auto_connect": true,
-"gui_position": Vector2(580, 260),
+"gui_position": Vector2(560, 160),
 "noise": SubResource("ZN_FastNoiseLite_i7141"),
 "type": "FastNoise3D",
 "x": 0.0,
