@@ -5,16 +5,16 @@ period = 118.6001
 
 [resource]
 graph_data = {
-"connections": [[36, 0, 6, 0], [35, 0, 36, 0], [8, 0, 33, 1], [34, 0, 35, 0], [32, 0, 33, 0], [31, 0, 32, 0], [30, 0, 31, 0], [33, 0, 34, 0], [2, 0, 30, 0]],
+"connections": [[2, 0, 30, 0], [33, 0, 34, 0], [30, 0, 31, 0], [31, 0, 32, 0], [32, 0, 33, 0], [34, 0, 35, 0], [8, 0, 33, 1], [35, 0, 36, 0], [36, 0, 6, 0]],
 "nodes": {
 "2": {
 "auto_connect": false,
-"gui_position": Vector2(-160, 100),
+"gui_position": Vector2(-140, 0),
 "type": "InputY"
 },
 "20": {
 "auto_connect": false,
-"gui_position": Vector2(-200, -320),
+"gui_position": Vector2(-140, -320),
 "gui_size": Vector2(500, 200),
 "name": &"Cheatsheet",
 "text": "DEINE FORMEL (Avatar-Worldgen):
@@ -31,7 +31,7 @@ Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
 },
 "30": {
 "auto_connect": false,
-"gui_position": Vector2(0, 100),
+"gui_position": Vector2(0, 0),
 "max": 150.0,
 "min": -150.0,
 "name": &"Clamp Y (-300 to 300)",
@@ -40,50 +40,50 @@ Wenn Dichte >= 0 -> Boden (Gras/Dirt/Stein)",
 "31": {
 "auto_connect": false,
 "b": 100.0,
-"gui_position": Vector2(300, 120),
+"gui_position": Vector2(340, 0),
 "name": &"y / 100",
 "type": "Divide"
 },
 "32": {
 "auto_connect": false,
 "b": -1.0,
-"gui_position": Vector2(520, 100),
+"gui_position": Vector2(580, 0),
 "name": &"* -1",
 "type": "Multiply"
 },
 "33": {
 "auto_connect": false,
-"gui_position": Vector2(880, 40),
+"gui_position": Vector2(820, 0),
 "name": &"Dichte: ((y/100)*-1) + Noise",
 "type": "Add"
 },
 "34": {
 "auto_connect": false,
-"gui_position": Vector2(1280, 60),
+"gui_position": Vector2(1120, 0),
 "step": 1.0,
 "type": "Stepify"
 },
 "35": {
 "auto_connect": false,
-"b": 0.0,
-"gui_position": Vector2(1520, 100),
+"b": 1.0,
+"gui_position": Vector2(1320, 0),
 "type": "Add"
 },
 "36": {
 "auto_connect": false,
-"gui_position": Vector2(1820, 80),
+"gui_position": Vector2(1520, 0),
 "max": 3.0,
 "min": 0.0,
 "type": "Clamp"
 },
 "6": {
 "auto_connect": false,
-"gui_position": Vector2(2040, 100),
+"gui_position": Vector2(1740, 0),
 "type": "OutputType"
 },
 "8": {
 "auto_connect": true,
-"gui_position": Vector2(580, 260),
+"gui_position": Vector2(580, 120),
 "noise": SubResource("ZN_FastNoiseLite_i7141"),
 "type": "FastNoise3D",
 "x": 0.0,
