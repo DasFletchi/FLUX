@@ -14,5 +14,3 @@ export_presets.cfg
 data_*/
 mono_crash.*.json
 
-# WakaTime / Hackatime
-addons/godot_super-wakatime/
