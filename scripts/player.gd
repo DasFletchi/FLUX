@@ -9,7 +9,10 @@ extends CharacterBody3D
 @onready var camera_3d: Camera3D = $Camera3D
 @onready var voxel_viewer: VoxelViewer = $VoxelViewer
 @onready var voxel_tool : VoxelTool = terrain.get_voxel_tool()
-@onready var origin_mining_raycast: Marker3D = $OriginMiningRaycast
+@onready var block_interactor: BlockInteractor = $Interactor
+@onready var bi: BlockInteractor = $Interactor
+
+
 
 var current_speed
 var jump_cooldown: float = 0.0
@@ -82,9 +85,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera_3d.rotate_x(-event.relative.y * mouse_sensitivity)
 		camera_3d.rotation.x = clamp(camera_3d.rotation.x, -PI/2, PI/2) #clamped halt die rotation um x rum die hälfte von PI (180) auf beiden seiten
 	if Input.is_action_just_pressed("break block"):
-		pick_block()
-		delete_block(voxel_result.VoxelRaycastResult)
-
+		bi.delete_block()
 
 func toggle_mm():
 	if Input.is_action_just_pressed("esc"):
@@ -93,13 +94,3 @@ func toggle_mm():
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		print("[PLAYER '", name, "'] Mouse mode toggled to: ", Input.mouse_mode)
-
-
-func pick_block():
-	var voxel_result: VoxelRaycastResult = voxel_tool.raycast(camera_3d.global_position, -camera_3d.global_transform.basis.z, 3) #so ein dummes glück das chatgpt korrekt war
-	if voxel_result:
-		print(voxel_result.position)
-
-
-func delete_block(voxel_result: VoxelRaycastResult):
-	voxel_tool.set_voxel(voxel_result.VoxelRaycastResult, 0) #nicht die klassen einfach so reinschrieben godot kann keine gedanken elsen, eimnfach IMMER variablen nutzen er hat den context nicht aber wenn man eine var über ein GDScriptnative class object macht dann schon

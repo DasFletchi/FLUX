@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dhtpjsglgh37g" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="Material" uid="uid://c75keiw8c43bm" path="res://scenes/blocks/materials/black.tres" id="2_g2els"]
+[ext_resource type="Script" uid="uid://ccr5sw6f0jnjj" path="res://scripts/block_interactor.gd" id="3_qhqgy"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_k7hc8"]
 
@@ -54,3 +55,6 @@ theme_override_font_sizes/font_size = 64
 text = "."
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Interactor" type="Node" parent="." unique_id=1639986369]
+script = ExtResource("3_qhqgy")
