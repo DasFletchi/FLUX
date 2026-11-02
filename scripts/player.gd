@@ -83,6 +83,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera_3d.rotation.x = clamp(camera_3d.rotation.x, -PI/2, PI/2) #clamped halt die rotation um x rum die hälfte von PI (180) auf beiden seiten
 	if Input.is_action_just_pressed("break block"):
 		pick_block()
+		delete_block(voxel_result.VoxelRaycastResult)
 
 
 func toggle_mm():
@@ -95,6 +96,10 @@ func toggle_mm():
 
 
 func pick_block():
-	var del_voxel_result = voxel_tool.raycast(camera_3d.global_position, -camera_3d.global_transform.basis.z, 3) #so ein dummes glück das chatgpt korrekt war
-	if del_voxel_result:
-		print(del_voxel_result.position)
+	var voxel_result: VoxelRaycastResult = voxel_tool.raycast(camera_3d.global_position, -camera_3d.global_transform.basis.z, 3) #so ein dummes glück das chatgpt korrekt war
+	if voxel_result:
+		print(voxel_result.position)
+
+
+func delete_block(voxel_result: VoxelRaycastResult):
+	voxel_tool.set_voxel(voxel_result.VoxelRaycastResult, 0) #nicht die klassen einfach so reinschrieben godot kann keine gedanken elsen, eimnfach IMMER variablen nutzen er hat den context nicht aber wenn man eine var über ein GDScriptnative class object macht dann schon
