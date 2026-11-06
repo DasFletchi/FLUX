@@ -77,6 +77,7 @@ func request_delete_block():
 #      wirft bei JEDEM Voxel-Update: "Attempt to call RPC with unknown peer ID".
 # ==============================================================================
 
+#btw Vector3 is the coordinate with 10 billion numbers after the comma, whereas Vector3i is an integer
 
 
 func change_block():
