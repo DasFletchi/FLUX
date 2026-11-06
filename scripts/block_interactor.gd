@@ -21,15 +21,17 @@ func pick_block():
 @rpc("reliable", "any_peer", "call_local") # call local muss darein weil Godot sonst eine Diva ist und wenn der server selber einen block removen will würde er sich sonst blocken weil er ja schon der empfänger ist
 func delete_block(voxel_result2):
 	if multiplayer.is_server():
-		if voxel_result2: #just preventing the game crashing when voxel_result2 is a null bc for example it didnt catch a block in its 3 blocks range
-			voxel_tool.set_voxel(voxel_result2.position, 0) #nicht die klassen einfach so reinschrieben godot kann keine gedanken elsen, eimnfach IMMER variablen nutzen er hat den context nicht aber wenn man eine var über ein GDScriptnative class object macht dann schon
-			print("Block at: ", voxel_result2.position, " was successfully removed")
+		if voxel_result2 != Vector3i.ZERO: #just preventing the game crashing when voxel_result2 is a null bc for example it didnt catch a block in its 3 blocks range
+			voxel_tool.set_voxel(voxel_result2, 0) #nicht die klassen einfach so reinschrieben godot kann keine gedanken elsen, eimnfach IMMER variablen nutzen er hat den context nicht aber wenn man eine var über ein GDScriptnative class object macht dann schon
+			print("Block at: ", voxel_result2, " was successfully removed")
 
 @rpc("reliable", "any_peer", "call_local")
 func request_delete_block():
 	var voxel_result2 = pick_block()
-	delete_block.rpc_id(1, voxel_result2.position)
-
+	
+	if voxel_result2:
+		delete_block.rpc_id(1, voxel_result2.position)
+#hier nicht voxel_result.position weil i gueess die Vector3i ist eh schon die position und die gibt halt dieser raycast dann aus meine fresse woher soll ich das wissen ugh gott
 
 
 func change_block():
