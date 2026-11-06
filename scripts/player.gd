@@ -85,7 +85,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera_3d.rotate_x(-event.relative.y * mouse_sensitivity)
 		camera_3d.rotation.x = clamp(camera_3d.rotation.x, -PI/2, PI/2) #clamped halt die rotation um x rum die hälfte von PI (180) auf beiden seiten
 	if Input.is_action_just_pressed("break block"):
-		bi.delete_block()
+		bi.request_delete_block()
 
 func toggle_mm():
 	if Input.is_action_just_pressed("esc"):
