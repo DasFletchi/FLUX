@@ -2,8 +2,8 @@ class_name VPhysics
 #da diese funktion nur mathe ist mssen wir das hier auch an gar nichts childen oder so was doch tbh schonmal sehr nice ist. wir müssen jedoch den block interactor childen weil @rpc kann man nicht mit einer static klasse machen. Ausserdem müssen die cams ja auch um den raycast zu schiesen an jedem einzelnden spieler dran sein und shit. 
 extends Node
 
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") #DAS IST EINE FLOAT KEIN VECTOR
-
+var gravity_vector = Vector3(0, -ProjectSettings.get_setting("physics/3d/default_gravity"), 0)
+var time = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,24 +17,22 @@ func _process(delta: float) -> void:
 
 func calc_pos_caller():
 	if is_multiplayer_authority():
-		if not time:
-			var time = 0
 		time = time + 0.1
-		calc_pos()
+		#calc_pos(time)
 
 
 func calc_pos(starting_pos: Vector3, velocity: Vector3, time: float):
 	var future_position = (
 		starting_pos
 		+ velocity * time
-		+ 0.5 * gravity * time * time
+		+ 0.5 * gravity_vector * time * time
 	)
 	#hätte ich auch hier als one liner schreiben könne aber so ist es leserlicher macht keinen unterschied ausser für dich der das hieer grade liest
 	return future_position
 
 
 func calc_pos_checker(future_position: Vector3):
-	
+	pass
 
 
 

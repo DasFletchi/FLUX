@@ -4,7 +4,6 @@ extends Node
 
 var voxel_tool: VoxelTool
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var terrain := get_parent().get_parent().get_node_or_null("VoxelTerrain") as VoxelTerrain #das walross kann hier noch nicht predicten was das überhaupt ist das führt dazudas wir nur dieocmpletions von einer normalen node rkeigen würden also schieben wir ihm hier in den arsch das es VoxelTerrain GDScriptNativeClass ist
@@ -12,7 +11,7 @@ func _ready() -> void:
 		voxel_tool = terrain.get_voxel_tool()
 
 
-func pick_block(): 
+func pick_block():
 	var voxel_result: VoxelRaycastResult = voxel_tool.raycast(camera_3d.global_position, -camera_3d.global_transform.basis.z, 3) #hier packen wir ein voxel raycast result hin WEIL WIR HIER DEKLARIEREN DAS DARF NUR EINMAL HIN DAS HEIST NUR DU BIST VON DEM TYPE, damit der godot compiler weis was genau er autocompleten kann etc
 	if voxel_result:
 		print(voxel_result.position)
@@ -28,7 +27,7 @@ func delete_block(voxel_result_position: Vector3i):
 @rpc("reliable", "any_peer", "call_local")
 func request_delete_block():
 	var voxel_result2 = pick_block()
-	
+
 	if voxel_result2:
 		delete_block.rpc_id(1, voxel_result2.position)
 	#hier nicht voxel_result.position weil i gueess die Vector3i ist eh schon die position und die gibt halt dieser raycast dann aus meine fresse woher soll ich das wissen ugh gott
@@ -82,3 +81,8 @@ func request_delete_block():
 
 func change_block():
 	pass
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("loose_block"):
+		delete_block(pick_block())

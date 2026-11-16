@@ -51,7 +51,7 @@ func _on_join_pressed() -> void:
 		return
 	var err = Noray.register_host()
 	print("Noray Registering host ERROR CODE: ", err)
-	
+
 	await Noray.on_pid
 	await Noray.register_remote()
 	Noray.on_connect_nat.connect(join_game)
@@ -64,7 +64,7 @@ func _on_join_pressed() -> void:
 
 func add_player(id = 1):
 	print("[WORLD] add_player called with id: ", id)
-	var player = player_scene.instantiate() #instanciating this will only add it to the RAM, no place it in the game world. 
+	var player = player_scene.instantiate() #instanciating this will only add it to the RAM, no place it in the game world.
 	player.name =  str(id) #I think we can change that name with something the use rcan come up with its own mind, it just needs to be a a unique name per session
 	print("[WORLD] Instantiated player with node name: '", player.name, "'. Adding child deferred...")
 	call_deferred("add_child", player) #call deferred just means "call this when youre finished with your current task"
