@@ -19,14 +19,12 @@ var bi: BlockInteractor:
 
 
 var block_materials_in_int = {
-	1: preload("res://scenes/blocks/materials/black.tres"),
+	1: preload("res://scenes/blocks/materials/grass.tres"),
 	2: preload("res://scenes/blocks/materials/dirt.tres"),
-	3: preload("res://scenes/blocks/materials/grass.tres"),
-	4: preload("res://scenes/blocks/materials/loam.tres"),
-	5: preload("res://scenes/blocks/materials/oak.tres"),
-	6: preload("res://scenes/blocks/materials/sandstone.tres"),
-	7: preload("res://scenes/blocks/materials/stone.tres"),
-	8: preload("res://scenes/blocks/materials/TEST_grün.tres"),
+	3: preload("res://scenes/blocks/materials/stone.tres"),
+	4: preload("res://scenes/blocks/materials/sandstone.tres"),
+	5: preload("res://scenes/blocks/materials/loam.tres"),
+	6: preload("res://scenes/blocks/materials/oak.tres"),
 }
 
 # load = erst available machen wenn es gebraucht wird (caused kleine stutter aber bei etwas was man nur alle 40 minuten braucht egal)
@@ -140,4 +138,10 @@ func spawn_loose_block(position: Vector3):
 	if block_id == 0:
 		print("[WORLD ERROR] No block found at position: ", position, ". Cannot spawn loose block.")
 		return
-	bi.request_delete_block()
+	bi.delete_block(position)
+	var block = loose_block.instantiate()
+	if block_materials_in_int.has(block_id):
+		block.set_material(block_materials_in_int[block_id])
+	block.global_position = Vector3(position) * 0.5 + Vector3(0.25, 0.25, 0.25)
+	block.linear_velocity = Vector3(0, 2.5, 0)
+	add_child(block)
