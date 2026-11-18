@@ -140,8 +140,14 @@ func spawn_loose_block(position: Vector3):
 		return
 	bi.delete_block(position)
 	var block = loose_block.instantiate()
+	add_child(block)
+
+	# we could just hardcode it but this way its tuffer fr:
+	var block_middle_local = Vector3(position) + Vector3(0.5, 0.5, 0.5)
+	block.global_position = terrain.to_global(block_middle_local) #converting it to the real position
+
 	if block_materials_in_int.has(block_id):
 		block.set_material(block_materials_in_int[block_id])
-	block.global_position = Vector3(position) * 0.5 + Vector3(0.25, 0.25, 0.25)
-	block.linear_velocity = Vector3(0, 2.5, 0)
-	add_child(block)
+
+	#block.linear_velocity = Vector3(0, 2.5, 0)
+	print("[WORLD] Loose block spawned at: ", block.global_position, " with block ID: ", block_id)
