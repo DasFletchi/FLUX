@@ -23,7 +23,7 @@ sky = SubResource("Sky_rwgxs")
 tonemap_mode = 2
 
 [sub_resource type="VoxelStreamRegionFiles" id="VoxelStreamRegionFiles_e3hyu"]
-directory = "res://flux_world_regions"
+directory = "res://world_regions"
 
 [sub_resource type="VoxelBlockyModelCube" id="VoxelBlockyModelCube_grass"]
 material_override_0 = ExtResource("1_grass")
