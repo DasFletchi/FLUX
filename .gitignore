@@ -14,3 +14,9 @@ export_presets.cfg
 data_*/
 mono_crash.*.json
 
+# Voxel terrain world saves
+world_regions/
+flux_world_regions/
+world.sqlite*
+saves/
+

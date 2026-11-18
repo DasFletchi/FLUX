@@ -39,6 +39,7 @@ func _ready() -> void:
 	if is_multiplayer_authority():
 		print("[PLAYER '", name, "'] Making Camera3D current because we have authority.")
 		camera_3d.make_current()
+		$CSGMesh3D.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY
 	else:
 		print("[PLAYER '", name, "'] Skipping Camera3D because we do NOT have authority.")
 

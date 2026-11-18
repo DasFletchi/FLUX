@@ -11,6 +11,12 @@ You can find the current [GDD](https://docs.google.com/document/d/11Ip6rSM0H4UV5
 * Netfox
 * Netfox.Noray
 
+### TODOs / Performance
+- [ ] **FastNoise2_3D (SIMD):** Recompile the addon with `fastnoise2=yes` and switch to `FastNoise2_3D` in the biome graphs (`Bifrost_desert` / `Bifrost_meadow`) to squeeze out the final 10–15% performance when flying fast through the voxel world.
+- [ ] **Texture Atlas / Texture Array:** Convert individual block materials to a unified texture atlas using `VoxelBlockyModelCube`'s native tile mapping (`atlas_size_in_tiles`, `tile_top`, etc.). This will merge chunk meshes into a single surface and reduce draw calls down to 1 per chunk for lower-end hardware.
+
+
+
 # CONTRIBUTING
 
 Thank you for contributing to FLUX. By contributing you confirm you have the right to submit the code/assets and agree they may be used under the project's license.

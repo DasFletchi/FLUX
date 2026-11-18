@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://n5p4qtgs72gs"]
 
+[ext_resource type="Script" path="res://scripts/loose_block.gd" id="1_loose"]
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gil31"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_sdhn1"]
@@ -10,6 +12,8 @@ size = Vector3(0.5, 0.5, 0.5)
 
 [node name="LooseBlock" type="RigidBody3D" unique_id=1723262269]
 physics_material_override = SubResource("PhysicsMaterial_gil31")
+continuous_cd = true
+script = ExtResource("1_loose")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1206475244]
 mesh = SubResource("BoxMesh_sdhn1")

@@ -9,7 +9,6 @@
 [ext_resource type="Material" path="res://scenes/blocks/materials/sandstone.tres" id="4_sandstone"]
 [ext_resource type="Material" path="res://scenes/blocks/materials/loam.tres" id="5_loam"]
 [ext_resource type="Material" path="res://scenes/blocks/materials/oak.tres" id="6_oak"]
-[ext_resource type="PackedScene" uid="uid://n5p4qtgs72gs" path="res://scenes/loose_block.tscn" id="10_w7kh3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nnsk1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -22,6 +21,9 @@ sky_material = SubResource("ProceduralSkyMaterial_nnsk1")
 background_mode = 2
 sky = SubResource("Sky_rwgxs")
 tonemap_mode = 2
+
+[sub_resource type="VoxelStreamRegionFiles" id="VoxelStreamRegionFiles_e3hyu"]
+directory = "res://flux_world_regions"
 
 [sub_resource type="VoxelBlockyModelCube" id="VoxelBlockyModelCube_grass"]
 material_override_0 = ExtResource("1_grass")
@@ -57,10 +59,14 @@ environment = SubResource("Environment_4wyf3")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=948565475]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 64.0
 
 [node name="VoxelTerrain" type="VoxelTerrain" parent="." unique_id=1421049333]
 max_view_distance = 512
+mesh_block_size = 32
 use_gpu_generation = true
+stream = SubResource("VoxelStreamRegionFiles_e3hyu")
 generator = ExtResource("1_4mrxx")
 mesher = SubResource("VoxelMesherBlocky_nnsk1")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -93,8 +99,6 @@ alignment = 1
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=626604139]
 _spawnable_scenes = PackedStringArray("uid://bjx5b7kd2kx74")
 spawn_path = NodePath("..")
-
-[node name="LooseBlock" parent="." unique_id=1723262269 instance=ExtResource("10_w7kh3")]
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/HOST" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/JOIN" to="." method="_on_join_pressed"]
