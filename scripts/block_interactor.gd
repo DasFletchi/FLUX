@@ -81,8 +81,3 @@ func request_delete_block():
 
 func change_block():
 	pass
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("loose_block"):
-		delete_block(pick_block())

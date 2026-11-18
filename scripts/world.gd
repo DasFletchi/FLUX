@@ -9,7 +9,29 @@ var enet_peer = ENetMultiplayerPeer.new()
 @onready var join_line_edit: LineEdit = $CanvasLayer/VBoxContainer/JoinLineEdit
 
 const NORAY_HOST = "tomfol.io"
-const NORAY_PORT = 8890 #i cant just imageine a random fucking code right here because the noray server only listens to that port.
+const NORAY_PORT = 8890 #I cant just imageine a random fucking code right here because the noray server only listens to that port.
+
+var loose_block = preload("res://scenes/loose_block.tscn")
+
+# at runtime:
+var bi: BlockInteractor:
+	get: return find_child("Interactor", true, false)
+
+
+var block_materials_in_int = {
+	1: preload("res://scenes/blocks/materials/black.tres"),
+	2: preload("res://scenes/blocks/materials/dirt.tres"),
+	3: preload("res://scenes/blocks/materials/grass.tres"),
+	4: preload("res://scenes/blocks/materials/loam.tres"),
+	5: preload("res://scenes/blocks/materials/oak.tres"),
+	6: preload("res://scenes/blocks/materials/sandstone.tres"),
+	7: preload("res://scenes/blocks/materials/stone.tres"),
+	8: preload("res://scenes/blocks/materials/TEST_grün.tres"),
+}
+
+# load = erst available machen wenn es gebraucht wird (caused kleine stutter aber bei etwas was man nur alle 40 minuten braucht egal)
+# preload = lädt die ganze sache bei Spielstart in den RAM
+
 
 
 func _ready() -> void:
@@ -18,6 +40,7 @@ func _ready() -> void:
 	multiplayer.server_disconnected.connect(func(): print("[NET CLIENT] Server disconnected!"))
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(func(id): print("[NET EVENT] Peer disconnected with ID: ", id))
+
 
 func _on_host_pressed() -> void:
 	var errConnectNorayRelayServer = await Noray.connect_to_host(NORAY_HOST, NORAY_PORT)
@@ -106,3 +129,15 @@ func relay_connect(address: String, port: int) -> void:
 func join_game(address: String, port: int) -> void:
 	enet_peer.create_client(address, port, 0, 0, 0, Noray.local_port) #we need the zeros just because 0 means unlimited
 	multiplayer.multiplayer_peer = enet_peer #we cant do this before hand because godot only takes stuff that arent husks
+
+
+func spawn_loose_block(position: Vector3):
+	var terrain = $VoxelTerrain as VoxelTerrain
+	var voxel_tool = terrain.get_voxel_tool()
+
+	var block_id: int = voxel_tool.get_voxel(position) #get the block id at the position we want to spawn the loose block at
+
+	if block_id == 0:
+		print("[WORLD ERROR] No block found at position: ", position, ". Cannot spawn loose block.")
+		return
+	bi.request_delete_block()

@@ -110,7 +110,6 @@ loose_block={
 
 [physics]
 
-common/physics_ticks_per_second=60
 3d/physics_engine="Jolt Physics"
 3d/default_gravity=16.0
 
@@ -120,5 +119,4 @@ rendering_device/driver.windows="d3d12"
 
 [voxel]
 
-threads/count/margin_below_max=1
 threads/main/time_budget_ms=4

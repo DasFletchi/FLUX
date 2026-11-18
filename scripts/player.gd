@@ -89,7 +89,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		bi.request_delete_block()
 	if Input.is_action_just_pressed("loose_block"):
 		var voxel_result = bi.pick_block()
-		bi.request_delete_block()
+		if voxel_result:
+			Net.server_function("spawn_loose_block",[voxel_result.position] )
 
 
 
