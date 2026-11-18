@@ -3,8 +3,10 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gil31"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_sdhn1"]
+size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gil31"]
+size = Vector3(0.5, 0.5, 0.5)
 
 [node name="LooseBlock" type="RigidBody3D" unique_id=1723262269]
 physics_material_override = SubResource("PhysicsMaterial_gil31")
