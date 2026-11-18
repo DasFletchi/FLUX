@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://n5p4qtgs72gs"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gil31"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_sdhn1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gil31"]
+
+[node name="LooseBlock" type="RigidBody3D" unique_id=1723262269]
+physics_material_override = SubResource("PhysicsMaterial_gil31")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1206475244]
+mesh = SubResource("BoxMesh_sdhn1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1923088928]
+shape = SubResource("BoxShape3D_gil31")

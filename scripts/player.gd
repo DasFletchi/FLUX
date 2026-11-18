@@ -22,8 +22,8 @@ func _enter_tree() -> void:
 	var auth_id = name.to_int()
 	set_multiplayer_authority(auth_id) #gives each player authority over the correct character.
 	print("[PLAYER '", name, "'] _enter_tree: Setting authority to ", auth_id, " | Local peer ID is: ", multiplayer.get_unique_id())
-	if multiplayer.is_server() and auth_id != 1:#This does not cancel each other out because the multiplayer.is_server() checks if you are the machine that pressed the host button, and remember our game is host authoritative so we control and have access to every node. And then we check with auth_id if the current node is not the host, so we can do TeamViewer type shit and control the other player's VoxelViewer. 
-		$VoxelViewer.set_network_peer_id(auth_id) #You just have to use the function because I guess `zylann.voxel` is just built like that and feels like a C++ quirk of `zylann.voxel`. 
+	if multiplayer.is_server() and auth_id != 1:#This does not cancel each other out because the multiplayer.is_server() checks if you are the machine that pressed the host button, and remember our game is host authoritative so we control and have access to every node. And then we check with auth_id if the current node is not the host, so we can do TeamViewer type shit and control the other player's VoxelViewer.
+		$VoxelViewer.set_network_peer_id(auth_id) #You just have to use the function because I guess `zylann.voxel` is just built like that and feels like a C++ quirk of `zylann.voxel`.
 		$VoxelViewer.requires_data_block_notifications = true
 
 
@@ -49,7 +49,7 @@ func _physics_process(delta: float) -> void:
 			_first_tick = false
 			print("[PLAYER '", name, "'] Physics process is actively running!")
 		if Input.is_action_just_pressed("esc"):
-			toggle_mm()	
+			toggle_mm()
 		# Add the gravity.
 		if not is_on_floor():
 			velocity += get_gravity() * delta
@@ -86,6 +86,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera_3d.rotation.x = clamp(camera_3d.rotation.x, -PI/2, PI/2) #clamped halt die rotation um x rum die hälfte von PI (180) auf beiden seiten
 	if Input.is_action_just_pressed("break block"):
 		bi.request_delete_block()
+	if Input.is_action_just_pressed("loose_block"):
+		var voxel_result = bi.pick_block()
+		bi.request_delete_block()
+
+
+
+
 
 func toggle_mm():
 	if Input.is_action_just_pressed("esc"):
