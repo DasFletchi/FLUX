@@ -1,4 +1,4 @@
-# Project Forge/FLUX
+# FLUX
 
 # **What is Flux?**
 
@@ -10,19 +10,18 @@ The gameplay loop of **FLUX** is a systemic, physics-driven progression from man
 
 ### **1\. Primitive Survival & Manual Construction (Early Game)**
 
-* **Gather:** Players spawn on a fragment (biome) and mine basic voxel resources (“Matter”). Matter is just every voxel without a function really. Those can be used for filler blocks or for building. The other 9 voxels, with actual functions can be crafted from this and will also inherit the same colour as the ground matter theyre made from. Those wont be crafted with a crafting menu. However i gotta refine this part still.  
+* **Gather:** Players spawn on a fragment (biome) and mine basic voxel resources (“Matter”). Matter is just every voxel without a function really. Those can be used for filler blocks or for building. *The other 9 voxels, with actual functions can be crafted from this and will also inherit the same colour as the ground matter theyre made from. Those wont be crafted with a crafting menu. However i gotta refine this part still.*  
 * **Build:** Structures are placed voxel-by-voxel without automation. However the’re tools in the game to for example place hundreds of little voxels fast, like in the competitor game “Scrap Mechanic”  
 * **Physics learning:** The world enforces a simple rule: mass and support matter. Heavier materials collapse if poorly supported under real-time physics simulation.
 
 ### **2\. Planning & Kinetic Automation (Mid Game)**
 
 * **Holo-Canvas/Integrated into a tool that tries to be like Minecraft building mods like World Edit or Axiom:** Players pre-design machines using a holographic planning system. (if they want, this will be done with a special button or tool idk, same for moving objects, it’s gonna be a “Axiom” mod in minecraft just for this game)ONLY IN CREATIVE NOT IN SURVIVAL  
-* **Materialization:** Designs are built physically using gathered resources.   
-* **Mechanical systems:** Energy is transmitted through shafts and gears instead of cables, forming early mechanical automation networks.
+* ***Mechanical systems:** Energy is transmitted through shafts and gears instead of cables, forming early mechanical automation networks.*
 
 ### **3\. Exploration & Interdependence (Late Game)**
 
-* **Fragment travel:** Players explore extreme biomes with unique physics conditions to obtain rare materials.  
+* **Fragment travel:** Players explore extreme biomes with unique physics conditions to obtain rare materials.   
 * **Forced specialization:** Logistics and system complexity make cooperation and role separation more efficient than solo play, naturally forming trade networks and industrial roles.
 
 ### **4\. Mastery (Endgame)**
@@ -32,7 +31,7 @@ The gameplay loop of **FLUX** is a systemic, physics-driven progression from man
 
 ## **Physics Engine**
 
-The Physics-Engine in use is gonna be **Godot Jolt**. In terms of big ahh systems with a lot of objects that constantly need collision checks, Jolt outperforms pretty much any other freely usable / open-source physics engine available right now. The reason for that is its modern architecture, which is heavily optimized around **multi-core and multithreaded processing**, meaning it doesn’t just dump all physics calculations onto a single core like it’s predecessor or Unitys Nvidia PhysX (dawg the name PhysX sounds so cool ngl) or rely on CUDA. Moving massive data pools from the CPU (procedural generation) to the GPU (physics calculations) wich causes a severe hardware pipeline bottleneck because it forces a high-frequency PCIe bus bottleneck and a catastrophic CPU-GPU synchronization lock. (OK I gotta be honest i didn’t know that, ts is from an LLM lol)
+The Physics-Engine in use is gonna be **Godot Jolt**. In terms of big ahh systems with a lot of objects that constantly need collision checks, Jolt outperforms pretty much any other freely usable / open-source physics engine available right now. The reason for that is its modern architecture, which is heavily optimized around **multi-core and multithreaded processing**, meaning it doesn’t just dump all physics calculations onto a single core like it’s predecessor or Unitys Nvidia PhysX (dawg the name PhysX sounds so cool ngl) or rely on CUDA. Moving massive data pools from the CPU (procedural generation) to the GPU (physics calculations) wich causes a severe hardware pipeline bottleneck because it forces a high-frequency PCIe bus bottleneck and a catastrophic CPU-GPU synchronization lock.
 
 Instead, it distributes workloads efficiently across CPU cores, which becomes extremely important once FLUX starts simulating large environments with tons of interacting bodies, moving parts, and chaotic player-driven nonsense.
 
@@ -52,7 +51,9 @@ Theres a 99% percent change im going to implement a physics engine like in Zelda
 
 ## **Fragment System (Working Concept)**
 
-The game is structured around a **Fragment system**, where the world is divided into separated, floating regions instead of one continuous map. These Fragments can be thought of as distinct biomes or floating islands, spatially isolated from each other.
+***LATE GAME GENERATION:***
+
+*The game is structured around a **Fragment system**, where the world is divided into separated, floating regions instead of one continuous map. These Fragments can be thought of as distinct biomes or floating islands, spatially isolated from each other.*
 
 Exploration between Fragments is intentionally designed to introduce risk and decision-making. Travel is not trivial, creating a sense of cost or “wager” when moving between regions. This separation is intended to make transitions meaningful rather than routine. 
 
@@ -95,21 +96,10 @@ Loam: 1.400 kg/m³
 
 ##  **Broad Feature list**
 
-### **Core Physics & Voxel System**
+### **Core Physics & Voxel System (Fully Integrated)**
 
-- [ ] **Custom Jolt Voxel Shape** — Direct ZXY-buffer collision, no mesh generation, ray-voxel intersection  
-- [ ] **Voxel Slice Manager** — 16×16×16 chunks, Static/Mutable/Custom compound shape switching  
-- [ ] **AABB Wake System** — Sleep/wake rigidbodies on voxel modification, for better Performance.  
-- [ ] **Deterministic ID Generator** — (player\_id \&lt;\&lt; 32\) | spawn\_sequence, cross-client sync  
-- [ ] **Fixed-Timestep Physics Driver** — Lockstep-ready, 60/120 Hz, no delta variation
-
-### **Chemistry Engine**
-
-- [ ] **Thermal Diffusion Grid** — Sparse voxel temperature field, dT/dt solver  
-- [ ] **Phase Transition Handler** — RigidBody ↔ fluid particle ↔ gas particle state machine  
-- [ ] **Material Property LUT** — T\_ignite, T\_melt, k\_thermal, ρ\_density per material ID  
-- [ ] **Reaction Cascade System** — Fire spread, oxidation chains (keep it low)  
-- [ ] **Physics type stuff** — Thermodynamics, par esemple convection
+- [x] **Zylann’s Voxel Module** — Fully integrated into the core engine to drive terrain loading, voxel modification, and physics collisions.  
+- [ ] **Deterministic ID Generator & Sync** — ID encoding (player\_id \<\< 32\) \| spawn\_sequence for consistent cross-client object lifecycle tracking.
 
 ### **Fluid & Gas Dynamics**
 
@@ -117,11 +107,10 @@ Loam: 1.400 kg/m³
 - [ ] **Gas Pressure Field** — Eulerian grid for steam/explosive gas, pressure wave propagation  
 - [ ] **Pump/Pipe Network** — Graph-based flow simulation, volumetric throughput
 
-### **Multiplayer & Networking**
+### **Multiplayer & Networking (Netfox Integrated)**
 
-- [ ] Pocket System — 2×2×2 km spatial partitioning, buffer zone body duplication  
-- [ ] **Input Lockstep Buffer** — Deterministic input queue, slowest-client pacing  
-- [ ] **Client Prediction \+ Rollback** — 30-frame history, resimulation on server correction  
+- [x] **Netfox Core Integration** — Actively managing multiplayer connections, state replication, and player visibility across clients.  
+- [ ] **Input Lockstep & Rollback** — Deterministic input queue, client prediction history, and server-side resimulation on correction.  
 - [ ] **Snapshot Interpolator** — Ghost bodies for distant pockets, 1 Hz → visual interpolation  
 - [ ] **Cross-Pocket Entity Migration** — Serialze/deserialize body \+ constraints at boundaries
 
@@ -133,31 +122,29 @@ Loam: 1.400 kg/m³
 
 ### **Building & Construction**
 
-- [ ] **Holo-Canvas Renderer** — Transparent preview voxels, no collision, mirror/flip tools  
 - [ ] **Materialization Queue** — Progressive physical spawn from blueprint, resource validation  
-- [ ] **Bulk Placement Tool** — Line/box/sphere voxel brushes, Scrap Mechanic-style rapid building
+- [ ] **Bulk Placement Tool?** — Line/box/sphere voxel brushes, Scrap Mechanic-style rapid building
 
 ### **AI & Ecosystem**
 
-- [ ] **Silicate Core-Drive AI** — Goal: seek energy sources, pathfind via physics navmesh  
+- [ ] **Mob AI** — Train own AI models to inference on play, for a more immersive fauna  
 - [ ] **Faction Behavior Tree** — Raid patterns, siege tactics, territorial claim logic  
 - [ ] **Ecology Simulator** — Flora growth, resource depletion, predator-prey cycles
 
 ### **UI & Feedback**
 
-- [ ] **Thermal Vision Overlay** — Color-map temperature display for engineering diagnostics  
-- [ ] **Stress Analysis View** — Structural integrity heatmap, failure prediction lines  
 - [ ] **Kinetic Network HUD** — Real-time RPM/torque/efficiency readouts on hover
 
 ### **Serialization & Persistence**
 
-- [ ] **Deterministic World Save** — Binary snapshot, ordered body spawn, constraint reconstruction  
+- [x] **Deterministic World Save** — Binary snapshot, ordered body spawn, constraint reconstruction  
 - [ ] **Blueprint Codec** — Compress Holo-Canvas designs to shareable/player-tradable format  
 - [ ] **Incremental Chunk Delta** — Only serialize modified slices, not full world
 
-### **Audio (for the end, cuz polish although it’s prolly the easiest to do)**
+### **Chemistry Engine**
 
-- [ ] **Procedural Mechanical Audio** — RPM-dependent gear whine, shaft resonance, metal stress  
-- [ ] **Thermal Audio Layer** — Crackling wood, hissing steam, expanding metal pings
-
-Wait thats actually a lot :(
+- [ ] **Thermal Diffusion Grid** — Sparse voxel temperature field, dT/dt solver  
+- [ ] **Phase Transition Handler** — RigidBody ↔ fluid particle ↔ gas particle state machine  
+- [ ] **Material Property LUT** — T\_ignite, T\_melt, k\_thermal, ρ\_density per material ID  
+- [ ] **Reaction Cascade System** — Fire spread, oxidation chains (keep it low)  
+- [ ] **Physics type stuff** — Thermodynamics, par esemple convection
