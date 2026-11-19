@@ -24,6 +24,7 @@ tonemap_mode = 2
 
 [sub_resource type="VoxelStreamRegionFiles" id="VoxelStreamRegionFiles_e3hyu"]
 directory = "res://world_regions"
+save_generator_output = true
 
 [sub_resource type="VoxelBlockyModelCube" id="VoxelBlockyModelCube_grass"]
 material_override_0 = ExtResource("1_grass")
