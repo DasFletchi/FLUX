@@ -9,6 +9,7 @@
 [ext_resource type="Material" path="res://scenes/blocks/materials/sandstone.tres" id="4_sandstone"]
 [ext_resource type="Material" path="res://scenes/blocks/materials/loam.tres" id="5_loam"]
 [ext_resource type="Material" path="res://scenes/blocks/materials/oak.tres" id="6_oak"]
+[ext_resource type="Script" uid="uid://b7ycmnvwdfjne" path="res://scripts/loose_blocks.gd" id="10_w7kh3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nnsk1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -22,9 +23,8 @@ background_mode = 2
 sky = SubResource("Sky_rwgxs")
 tonemap_mode = 2
 
-[sub_resource type="VoxelStreamRegionFiles" id="VoxelStreamRegionFiles_e3hyu"]
-directory = "res://world_regions"
-save_generator_output = true
+[sub_resource type="VoxelStreamSQLite" id="VoxelStreamSQLite_e3hyu"]
+database_path = "res://world.sqlite"
 
 [sub_resource type="VoxelBlockyModelCube" id="VoxelBlockyModelCube_grass"]
 material_override_0 = ExtResource("1_grass")
@@ -50,6 +50,14 @@ models = Array[VoxelBlockyModel]([null, SubResource("VoxelBlockyModelCube_grass"
 [sub_resource type="VoxelMesherBlocky" id="VoxelMesherBlocky_nnsk1"]
 library = SubResource("VoxelBlockyLibrary_rwgxs")
 
+[sub_resource type="BoxMesh" id="BoxMesh_mg0ov"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="MultiMesh" id="MultiMesh_sdhn1"]
+transform_format = 1
+use_colors = true
+mesh = SubResource("BoxMesh_mg0ov")
+
 [node name="World" type="Node3D" unique_id=1825888102]
 script = ExtResource("1_7r4gi")
 player_scene = ExtResource("2_rwgxs")
@@ -67,7 +75,7 @@ directional_shadow_max_distance = 64.0
 max_view_distance = 512
 mesh_block_size = 32
 use_gpu_generation = true
-stream = SubResource("VoxelStreamRegionFiles_e3hyu")
+stream = SubResource("VoxelStreamSQLite_e3hyu")
 generator = ExtResource("1_4mrxx")
 mesher = SubResource("VoxelMesherBlocky_nnsk1")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -100,6 +108,10 @@ alignment = 1
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=626604139]
 _spawnable_scenes = PackedStringArray("uid://bjx5b7kd2kx74")
 spawn_path = NodePath("..")
+
+[node name="LooseBlocks" type="MultiMeshInstance3D" parent="." unique_id=167682849]
+multimesh = SubResource("MultiMesh_sdhn1")
+script = ExtResource("10_w7kh3")
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/HOST" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/JOIN" to="." method="_on_join_pressed"]

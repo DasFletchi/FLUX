@@ -151,3 +151,17 @@ func spawn_loose_block(position: Vector3):
 
 	#block.linear_velocity = Vector3(0, 2.5, 0)
 	print("[WORLD] Loose block spawned at: ", block.global_position, " with block ID: ", block_id)
+
+
+func loose_block2(position: Vector3):
+	# for the new approach we'll be using the PhysicsServer3D and MultimeshInstances3D to see our blocks, wich will be way more performant than our current v1
+	var terrain = $VoxelTerrain as VoxelTerrain
+	var voxel_tool = terrain.get_voxel_tool()
+
+	var block_id: int = voxel_tool.get_voxel(position)
+
+	if block_id == 0:
+		print("[WORLD ERROR] No block found at position: ", position, ". Cannot spawn loose block.")
+		return
+	bi.delete_block(position)
+	PhysicsServer3D.body_create() #this will create a new body in the physics server, but we need to set its properties and add it to the scene tree to see it

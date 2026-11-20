@@ -119,4 +119,4 @@ rendering_device/driver.windows="d3d12"
 
 [voxel]
 
-threads/main/time_budget_ms=16
+threads/main/time_budget_ms=4
