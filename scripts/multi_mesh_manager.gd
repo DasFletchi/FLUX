@@ -7,9 +7,18 @@ extends Node3D
 
 @onready var world: Node3D = $".."
 
+var space: RID #RID stands for Resource ID, and is a low-level handle to a resource in Godot. In this case, it's used to reference the physics space of the world.
+var shared_shape: RID
+
+# In low-level Godot, I need these just like other variables to pass into functions and do stuff with them.
+# HOWEVER, 'shared_shape' is not the box shape information itself, but only points to it,
+# because there is only one central physics server. Imagine it like in a club you get your ID for the jacket and then you can tell
+# the staff with your id what you want to do with that, you dont do It yourself, because again there's only one central physics server.
+
 
 # Das Dictionary speichert keine Kopien, sondern fungiert wie ein Symlink / Wegweiser direkt auf das echte MMI im Szenenbaum.
 var active_multimeshes: Dictionary = {}
+var block_bodies: Dictionary = {}
 
 var block_materials_in_int = {
 	1: preload("res://scenes/blocks/materials/grass.tres"),
@@ -28,6 +37,13 @@ func spb(block_id: int, position: Vector3) -> void:
 		var instance_id = mmi.multimesh.visible_instance_count
 		mmi.multimesh.set_instance_transform(instance_id, Transform3D(Basis(), position))
 		mmi.multimesh.visible_instance_count += 1
+		# now starts the part where we start to become little hackers lol. now where pushing stuff around in the CPU's L1 Cache (i jsut wanted to say the word "L1 Cache" it sounds so smart idk, prolyl is true though)
+		var body: RID = PhysicsServer3D.body_create() #just the new object we will configure now we coudve named it anything else, it irrelevant its just a name
+		PhysicsServer3D.body_add_shape(body, shared_shape)
+		PhysicsServer3D.body_set_space(body, space)
+		PhysicsServer3D.body_set_mode(body, PhysicsServer3D.BODY_MODE_RIGID) #making this as an RID would give us no extra performance because it is litterally just a number 0 is Static 1 is Kinematic (only changeable with code) 2 is Rigid (behaviour like a rigidbodie like the name sais lol)
+		var body_transform = Transform3D(Basis(), position)
+		PhysicsServer3D.body_set_state(body, PhysicsServer3D.BODY_STATE_TRANSFORM, body_transform)
 	else:
 		print("[MULTI MESH MANAGER] Creating new MultiMeshInstance for block ID: ", block_id)
 		_spawn_new_mmi(block_id)
@@ -57,3 +73,10 @@ func _spawn_new_mmi(block_id: int) -> void:
 func _physics_process(delta: float) -> void: # we need the underscore, because else Godot wont recognize the physics process as physics process
 	#erase MultiMeshInstances3D from scene tree and Dictionary when not needed anymore
 	pass
+
+
+func _ready() -> void:
+	space = world.get_world_3d().space
+	shared_shape = PhysicsServer3D.box_shape_create()
+	PhysicsServer3D.shape_set_data(shared_shape, block_size * 0.5) #we need the * 0.5 because the low level Godot uses half extends means we gotta half our values because it starts from the center
+	# This part of the game needs "hyperoptimization", it is shaving of compute if we set this one time in the ready. Instead of everytime when we're creating a new block in the spb() function
