@@ -44,6 +44,9 @@ func spb(block_id: int, position: Vector3) -> void:
 		PhysicsServer3D.body_set_mode(body, PhysicsServer3D.BODY_MODE_RIGID) #making this as an RID would give us no extra performance because it is litterally just a number 0 is Static 1 is Kinematic (only changeable with code) 2 is Rigid (behaviour like a rigidbodie like the name sais lol)
 		var body_transform = Transform3D(Basis(), position)
 		PhysicsServer3D.body_set_state(body, PhysicsServer3D.BODY_STATE_TRANSFORM, body_transform)
+		if not block_bodies.has(block_id):
+			block_bodies[block_id] = [] #dann machen wir dafür platz i mdict und packen da ein array rein, das array hält dann alle blöcke dieses typs
+		block_bodies[block_id].append(body) #jetzt packen wir den body in das array rein, das wir gerade gemacht haben
 	else:
 		print("[MULTI MESH MANAGER] Creating new MultiMeshInstance for block ID: ", block_id)
 		_spawn_new_mmi(block_id)
@@ -71,8 +74,33 @@ func _spawn_new_mmi(block_id: int) -> void:
 
 
 func _physics_process(delta: float) -> void: # we need the underscore, because else Godot wont recognize the physics process as physics process
-	#erase MultiMeshInstances3D from scene tree and Dictionary when not needed anymore
-	pass
+	for block_id in block_bodies: #macht hier kurz on the fly eine neue var mit dem namen block_id und geht die dann hoch
+		# gehe durch jede block_id, die in block_bodies existiert
+		var mmi2 = active_multimeshes[block_id] #i just like to make it 2 because why not idk, this grabs the right MultiMeshInstance3D
+		var bodies = block_bodies[block_id] #this grabs the right array of RIDs for this block_id, now we need to choose wich one to change/link the position to
+
+
+		# Warum rückwärts zählen mit range(bodies.size() - 1, -1, -1)?
+		# Stell dir eine Schlange vor: Platz 0 (Anton), Platz 1 (Berta), Platz 2 (Caesar).
+		# Wenn du vorwärts zählst und Anton (0) löschst, rücken Berta und Caesar auf (Berta wird 0, Caesar wird 1).
+		# Der Loop springt aber stur zu Platz 1 (Caesar) -> Berta wird komplett übersprungen!
+		# Und bei Platz 2 crasht Godot, weil es Platz 2 gar nicht mehr gibt (Index out of bounds).
+		# Beim RÜCKWÄRTS zählen (2 -> 1 -> 0) löscht man von hinten: Vorne verschiebt sich nichts, niemand wird übersprungen und nix crasht!
+		for index in range(bodies.size() - 1, -1, -1):
+			var body_transform = PhysicsServer3D.body_get_state(bodies[index], PhysicsServer3D.BODY_STATE_TRANSFORM)
+			mmi2.multimesh.set_instance_transform(index, body_transform)
+			# Godot's PhysicsServer3D doesn't have separate functions like 'body_is_sleeping()' or 'body_get_position()', because the devs were lazy (ofc).
+			# Instead, it uses one universal query function: 'body_get_state(who, what_to_check)'.
+			# 1st param: Which physics body (bodies[index])
+			# 2nd param: What state to check (e.g. BODY_STATE_TRANSFORM or BODY_STATE_SLEEPING)
+			var sleeping = PhysicsServer3D.body_get_state(bodies[index], PhysicsServer3D.BODY_STATE_SLEEPING)
+			if sleeping: #sleeping means Vector3.ZERO, just in a low level PhysicsServer3D Language
+				print("[MULTI MESH MANAGER] Block at index ", index, " for block ID ", block_id, " is not moving. Removing from MultiMeshInstance and physics bodies.")
+				PhysicsServer3D.free_rid(bodies[index]) # Free the RID to avoid memory leaks
+				bodies.remove_at(index) # Remove the body from the array, I mean yeah it is just a local var but it is linked with the main array from the top so its fine if we remove it from here it will be removed from the top array aswell :3 It's just a symlink/reference/Wegweiser. Simple numbers like int and float's just get copied. But Arrays and Dictionaries get linked (referenced)
+				mmi2.multimesh.visible_instance_count -= 1 # Decrease the visible instance count
+#erase MultiMeshInstances3D from scene tree and Dictionary when not needed anymore
+
 
 
 func _ready() -> void:
