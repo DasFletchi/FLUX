@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c0ahgyeoaoo0n"]
+
+[ext_resource type="Script" uid="uid://bvswm2g3dp1as" path="res://scripts/multi_mesh_manager.gd" id="1_g5kem"]
+
+[node name="MultiMeshManager" type="Node3D" unique_id=219555834]
+script = ExtResource("1_g5kem")
