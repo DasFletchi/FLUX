@@ -13,6 +13,7 @@
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nnsk1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_bottom_color = Color(0.6627451, 0.67058825, 0.6862745, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
 [sub_resource type="Sky" id="Sky_rwgxs"]
@@ -22,6 +23,25 @@ sky_material = SubResource("ProceduralSkyMaterial_nnsk1")
 background_mode = 2
 sky = SubResource("Sky_rwgxs")
 tonemap_mode = 2
+ssao_enabled = true
+ssao_radius = 1.34
+ssao_intensity = 1.32
+ssil_enabled = true
+ssil_intensity = 1.17
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_energy = 1.05
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.7670645, 0.7900672, 0.82585627, 1)
+fog_density = 1.0
+fog_sky_affect = 0.0
+fog_depth_begin = 140.0
+fog_depth_end = 240.0
+volumetric_fog_density = 0.0115
+volumetric_fog_anisotropy = 0.25
+volumetric_fog_sky_affect = 0.931
+adjustment_enabled = true
 
 [sub_resource type="VoxelStreamSQLite" id="VoxelStreamSQLite_e3hyu"]
 database_path = "res://world.sqlite"

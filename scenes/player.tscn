@@ -33,6 +33,7 @@ fov = 130.45998
 near = 0.03
 
 [node name="VoxelViewer" type="VoxelViewer" parent="." unique_id=677273485]
+view_distance = 512
 view_distance_vertical_ratio = 0.3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1467183820]
