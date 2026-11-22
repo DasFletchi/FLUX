@@ -6,6 +6,7 @@ extends Node3D
 @export var block_size: Vector3 = Vector3(0.5, 0.5, 0.5)
 @export var t_till_mmi_plus: int = 20
 @export var mmi_plus: int = 5000
+@export var sleep_tolerancy_ms: int = 500
 @onready var world: Node3D = $".."
 
 var space: RID #RID stands for Resource ID, and is a low-level handle to a resource in Godot. In this case, it's used to reference the physics space of the world.
@@ -20,6 +21,7 @@ var shared_shape: RID
 # Das Dictionary speichert keine Kopien, sondern fungiert wie ein Symlink / Wegweiser direkt auf das echte MMI im Szenenbaum.
 var active_multimeshes: Dictionary = {}
 var block_bodies: Dictionary = {}
+var block_birth_date: Dictionary = {}
 
 var block_materials_in_int = {
 	1: preload("res://scenes/blocks/materials/grass.tres"),
@@ -45,6 +47,8 @@ func spb(block_id: int, position: Vector3) -> void:
 		PhysicsServer3D.body_set_mode(body, PhysicsServer3D.BODY_MODE_RIGID) #making this as an RID would give us no extra performance because it is litterally just a number 0 is Static 1 is Kinematic (only changeable with code) 2 is Rigid (behaviour like a rigidbodie like the name sais lol)
 		var body_transform = Transform3D(Basis(), position)
 		PhysicsServer3D.body_set_state(body, PhysicsServer3D.BODY_STATE_TRANSFORM, body_transform)
+		PhysicsServer3D.body_set_state(body, PhysicsServer3D.BODY_STATE_SLEEPING, false)
+		block_birth_date[body] = Time.get_ticks_msec()
 		if not block_bodies.has(block_id):
 			block_bodies[block_id] = [] #dann machen wir dafür platz i mdict und packen da ein array rein, das array hält dann alle blöcke dieses typs
 		block_bodies[block_id].append(body) #jetzt packen wir den body in das array rein, das wir gerade gemacht haben
@@ -83,7 +87,6 @@ func _physics_process(delta: float) -> void: # we need the underscore, because e
 		var mmi2 = active_multimeshes[block_id] #i just like to make it 2 because why not idk, this grabs the right MultiMeshInstance3D
 		var bodies = block_bodies[block_id] #this grabs the right array of RIDs for this block_id, now we need to choose wich one to change/link the position to
 
-
 		# Warum rückwärts zählen mit range(bodies.size() - 1, -1, -1)?
 		# Stell dir eine Schlange vor: Platz 0 (Anton), Platz 1 (Berta), Platz 2 (Caesar).
 		# Wenn du vorwärts zählst und Anton (0) löschst, rücken Berta und Caesar auf (Berta wird 0, Caesar wird 1).
@@ -98,14 +101,20 @@ func _physics_process(delta: float) -> void: # we need the underscore, because e
 			# 1st param: Which physics body (bodies[index])
 			# 2nd param: What state to check (e.g. BODY_STATE_TRANSFORM or BODY_STATE_SLEEPING)
 			var sleeping = PhysicsServer3D.body_get_state(bodies[index], PhysicsServer3D.BODY_STATE_SLEEPING)
-			if sleeping: #sleeping means Vector3.ZERO, just in a low level PhysicsServer3D Language
-				print("[MULTI MESH MANAGER] Block at index ", index, " for block ID ", block_id, " is not moving. Removing from MultiMeshInstance and physics bodies.")
+			var age_in_ms = Time.get_ticks_msec() - block_birth_date[bodies[index]] #grabs the correct birth date from our dict's
+
+			if age_in_ms > sleep_tolerancy_ms and sleeping: #sleeping means Vector3.ZERO, just in a low level PhysicsServer3D Language
+				print("[MULTI MESH MANAGER] Block at index ", index, " for block ID ", block_id, " is not moving. Snapping to voxel grid.")
+				
+				# Sort out stuff
+				var terrain = world.get_node("VoxelTerrain") as VoxelTerrain
+				var voxel_pos = Vector3i(terrain.to_local(body_transform.origin).floor())
+				terrain.get_voxel_tool().set_voxel(voxel_pos, block_id)
+				block_birth_date.erase(bodies[index])
 				PhysicsServer3D.free_rid(bodies[index]) # Free the RID to avoid memory leaks
-				bodies.remove_at(index) # Remove the body from the array, I mean yeah it is just a local var but it is linked with the main array from the top so its fine if we remove it from here it will be removed from the top array aswell :3 It's just a symlink/reference/Wegweiser. Simple numbers like int and float's just get copied. But Arrays and Dictionaries get linked (referenced)
+				bodies.remove_at(index) # Remove the body from the array
 				mmi2.multimesh.visible_instance_count -= 1 # Decrease the visible instance count
-#erase MultiMeshInstances3D from scene tree and Dictionary when not needed anymore
-
-
+				Net.server_function("change_block_forwarder", [voxel_pos, block_id])
 
 func _ready() -> void:
 	space = world.get_world_3d().space

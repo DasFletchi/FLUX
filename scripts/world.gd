@@ -8,6 +8,7 @@ var enet_peer = ENetMultiplayerPeer.new()
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 @onready var join_line_edit: LineEdit = $CanvasLayer/VBoxContainer/JoinLineEdit
 @onready var multi_mesh_manager: Node3D = $MultiMeshManager
+@onready var interactor: BlockInteractor = $Interactor
 
 const NORAY_HOST = "tomfol.io"
 const NORAY_PORT = 8890 #I cant just imageine a random fucking code right here because the noray server only listens to that port.
@@ -165,4 +166,9 @@ func loose_block2(position: Vector3):
 		print("[WORLD ERROR] No block found at position: ", position, ". Cannot spawn loose block.")
 		return
 	bi.delete_block(position)
-	multi_mesh_manager.spb(block_id, position)
+	var block_middle_local = Vector3(position) + Vector3(0.5, 0.5, 0.5)
+	var spawn_pos = terrain.to_global(block_middle_local)
+	multi_mesh_manager.spb(block_id, spawn_pos)
+
+func change_block_forwarder(pos: Vector3i, block_id: int):
+	interactor.change_block(pos, block_id)

@@ -10,6 +10,7 @@
 [ext_resource type="Material" path="res://scenes/blocks/materials/loam.tres" id="5_loam"]
 [ext_resource type="Material" path="res://scenes/blocks/materials/oak.tres" id="6_oak"]
 [ext_resource type="PackedScene" uid="uid://c0ahgyeoaoo0n" path="res://scenes/multi_mesh_manager.tscn" id="10_w7kh3"]
+[ext_resource type="PackedScene" uid="uid://chq5gavbrbuo4" path="res://scenes/interactor.tscn" id="11_e3hyu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nnsk1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -102,6 +103,8 @@ _spawnable_scenes = PackedStringArray("uid://bjx5b7kd2kx74")
 spawn_path = NodePath("..")
 
 [node name="MultiMeshManager" parent="." unique_id=219555834 instance=ExtResource("10_w7kh3")]
+
+[node name="Interactor" parent="." unique_id=763074461 instance=ExtResource("11_e3hyu")]
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/HOST" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/JOIN" to="." method="_on_join_pressed"]

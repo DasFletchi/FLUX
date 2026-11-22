@@ -78,6 +78,10 @@ func request_delete_block():
 
 #btw Vector3 is the coordinate with 10 billion numbers after the comma, whereas Vector3i is an integer
 
-
-func change_block():
-	pass
+@rpc("reliable", "any_peer", "call_local")
+func change_block(pos: Vector3i, block_id: int):
+	if multiplayer.is_server():
+		var terrain = $VoxelTerrain as VoxelTerrain
+		var voxel_tool = terrain.get_voxel_tool()
+		voxel_tool.set_voxel(pos, block_id)
+		print("[WORLD] Block at ", pos, " changed to ID: ", block_id)
