@@ -54,6 +54,7 @@ func spb(block_id: int, position: Vector3) -> void:
 		spb(block_id, position) #recursive call to add the block after creating the new MultiMeshInstance
 	if visible_instance_count > instance_count -t_till_mmi_plus :
 		instance_count += mmi_plus
+		print("[MULTI MESH MANAGER] Instance count increased to: ", instance_count, " for block ID: ", block_id)
 
 
 

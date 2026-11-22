@@ -164,4 +164,4 @@ func loose_block2(position: Vector3):
 		print("[WORLD ERROR] No block found at position: ", position, ". Cannot spawn loose block.")
 		return
 	bi.delete_block(position)
-	PhysicsServer3D.body_create() #this will create a new body in the physics server, but we need to set its properties and add it to the scene tree to see it
+	multimesh_manager.spb(block_id, position)

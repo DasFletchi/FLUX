@@ -90,7 +90,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("loose_block"):
 		var voxel_result = bi.pick_block()
 		if voxel_result:
-			Net.server_function("spawn_loose_block",[voxel_result.position] )
+			Net.server_function("loose_block2",[voxel_result.position] )
 
 
 
