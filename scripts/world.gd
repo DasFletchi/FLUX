@@ -171,4 +171,4 @@ func loose_block2(position: Vector3):
 	multi_mesh_manager.spb(block_id, spawn_pos)
 
 func change_block_forwarder(pos: Vector3i, block_id: int):
-	interactor.change_block(pos, block_id)
+	bi.change_block(pos, block_id)
