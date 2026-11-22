@@ -2,9 +2,10 @@ extends Node3D
 #this script is gonna spawn a new multimesh instance for each new block
 
 @export var visible_instance_count: int = 0
-@export var instance_count: int = 1000
+@export var instance_count: int = 5000
 @export var block_size: Vector3 = Vector3(0.5, 0.5, 0.5)
-
+@export var t_till_mmi_plus: int = 20
+@export var mmi_plus: int = 5000
 @onready var world: Node3D = $".."
 
 var space: RID #RID stands for Resource ID, and is a low-level handle to a resource in Godot. In this case, it's used to reference the physics space of the world.
@@ -51,6 +52,8 @@ func spb(block_id: int, position: Vector3) -> void:
 		print("[MULTI MESH MANAGER] Creating new MultiMeshInstance for block ID: ", block_id)
 		_spawn_new_mmi(block_id)
 		spb(block_id, position) #recursive call to add the block after creating the new MultiMeshInstance
+	if visible_instance_count > instance_count -t_till_mmi_plus :
+		instance_count += mmi_plus
 
 
 
