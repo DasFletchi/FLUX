@@ -10,7 +10,6 @@ var enet_peer = ENetMultiplayerPeer.new()
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 @onready var join_line_edit: LineEdit = $CanvasLayer/VBoxContainer/JoinLineEdit
 @onready var multi_mesh_manager: Node3D = $MultiMeshManager
-@onready var interactor: BlockInteractor = $Interactor
 
 const NORAY_HOST = "tomfol.io"
 const NORAY_PORT = 8890 #I cant just imageine a random fucking code right here because the noray server only listens to that port.
