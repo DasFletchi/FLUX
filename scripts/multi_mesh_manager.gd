@@ -7,6 +7,7 @@ extends Node3D
 @export var t_till_mmi_plus: int = 20
 @export var mmi_plus: int = 5000
 @export var sleep_tolerancy_ms: int = 500
+@export var simulation_distance: int = 250
 @onready var world: Node3D = $".."
 
 var space: RID #RID stands for Resource ID, and is a low-level handle to a resource in Godot. In this case, it's used to reference the physics space of the world.
@@ -32,7 +33,7 @@ var block_materials_in_int = {
 	6: preload("res://scenes/blocks/materials/oak.tres"),
 }
 
-
+@rpc("authority", "reliable")
 func spb(block_id: int, position: Vector3) -> void:
 	if active_multimeshes.has(block_id):
 		print("[MULTI MESH MANAGER] Adding block to existing MultiMeshInstance for block ID: ", block_id)
@@ -105,16 +106,16 @@ func _physics_process(delta: float) -> void: # we need the underscore, because e
 
 			if age_in_ms > sleep_tolerancy_ms and sleeping: #sleeping means Vector3.ZERO, just in a low level PhysicsServer3D Language
 				print("[MULTI MESH MANAGER] Block at index ", index, " for block ID ", block_id, " is not moving. Snapping to voxel grid.")
-				
+
 				# Sort out stuff
 				var terrain = world.get_node("VoxelTerrain") as VoxelTerrain
 				var voxel_pos = Vector3i(terrain.to_local(body_transform.origin).floor())
-				terrain.get_voxel_tool().set_voxel(voxel_pos, block_id)
 				block_birth_date.erase(bodies[index])
 				PhysicsServer3D.free_rid(bodies[index]) # Free the RID to avoid memory leaks
 				bodies.remove_at(index) # Remove the body from the array
 				mmi2.multimesh.visible_instance_count -= 1 # Decrease the visible instance count
-				Net.server_function("change_block_forwarder", [voxel_pos, block_id])
+				if multiplayer.is_server():
+					Net.server_function("change_block_forwarder", [voxel_pos, block_id])
 
 func _ready() -> void:
 	space = world.get_world_3d().space

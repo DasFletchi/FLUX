@@ -2,6 +2,8 @@ extends Node3D
 
 var enet_peer = ENetMultiplayerPeer.new()
 @export var player_scene : PackedScene
+@export var simulation_distance: int = 250 #lowk i should make that to a savefile
+
 
 @onready var host: Button = $CanvasLayer/VBoxContainer/HOST
 @onready var join: Button = $CanvasLayer/VBoxContainer/JOIN
@@ -169,6 +171,10 @@ func loose_block2(position: Vector3):
 	var block_middle_local = Vector3(position) + Vector3(0.5, 0.5, 0.5)
 	var spawn_pos = terrain.to_global(block_middle_local)
 	multi_mesh_manager.spb(block_id, spawn_pos)
+	for peer_id in multiplayer.get_peers():
+		var player = get_node_or_null(str(peer_id))
+		if player and player.global_position.distance_to(spawn_pos) <= simulation_distance:
+			multi_mesh_manager.spb.rpc_id(peer_id, block_id, spawn_pos) #die beiden vars für spb müssen sich ahinten anstellen
 
 func change_block_forwarder(pos: Vector3i, block_id: int):
 	bi.change_block(pos, block_id)
